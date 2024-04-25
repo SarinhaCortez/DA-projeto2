@@ -10,11 +10,9 @@ void ToyGraphParser(const string& filename, Graph<int> &g) {
     if (!csv.is_open()) {
         cerr << "Error opening csv file!" << endl;
     }
-
+    unordered_set<int> seenVertices;
     string line;
     getline(csv, line);
-
-    unordered_set<int> seenVertices;
 
         while (getline(csv, line)) {
             istringstream ss(line);
