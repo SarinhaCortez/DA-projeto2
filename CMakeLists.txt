@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.26)
 project(DA_projeto2)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -13,4 +13,5 @@ add_executable(DA_projeto2
         data_structures/UFDS.h
         DataParser.cpp
         DataParser.h
-        main.cpp)
+        main.cpp
+        Utils.cpp)
