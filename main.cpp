@@ -1,10 +1,42 @@
 #include "DataParser.h"
+#include "Utils.h"
 
 int main(){
     /*fully connected  stadiums.csv, tourism.csv), not fully connected (shipping.csv) */
     Graph<int> g;
-    Parser("tourism.csv", g);
-    //Parser("edges_25.csv", g);
+    Parser("stadiums.csv", g);
+    Vertex<int> * initial;
+    for(auto v: g.getVertexSet()){
+        v->setVisited(false);
+        if(v->getInfo()==0){
+            initial=v;
+            initial->setVisited(true);
+        }
+    }
+
+    /*for (auto v:g.getVertexSet()){
+        for(auto edge: v->getAdj() ){
+            cout<<edge->getOrig()->getInfo()<<"----->"<<edge->getDest()->getInfo()<<endl;
+        }
+    }*/
+    std::vector<Vertex<int> *> tsp;
+    std::vector<Vertex<int> *> final;
+    int numVertex = g.getNumVertex();
+
+    tsp.push_back(initial);
+    int dist = 0;
+    int minDist = INT_MAX;
+    bool found=false;
+    if(BacktrakingTSP(g, dist, minDist, tsp, final, numVertex, initial, found)){
+        for(auto vertex: final){
+            cout<<vertex->getInfo()<<endl;
+        }
+    }
+    else{
+        cout<<"Ta mal lol"<<endl;
+    }
+
+        //Parser("edges_25.csv", g);
     //Parser("graph1", g);
     /*
     cout <<"Edges"<<endl;
