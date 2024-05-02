@@ -7,11 +7,14 @@ int main(){
     /*fully connected  stadiums.csv, tourism.csv), not fully connected (shipping.csv) */
     MGraph g;
 
-    Parser("edges_900", g);
-    for(auto v : g.getVertexSet()){
-        cout << "First: " << v.first << "Latitude: " << v.second.first << "Longitude: "<<v.second.second << endl;
+    Parser("stadiums.csv", g);
+    for(int i = 0; i < g.getNumVertex() + 1; i++){
+        for(auto el : g.getAdj(i)){
+            cout << el << " ";
+        }
+        cout << endl;
     }
-    /*
+/*
     for(auto v : (*g.getDistMatrix())){
         for(auto d : v){
             cout << d <<" ";
