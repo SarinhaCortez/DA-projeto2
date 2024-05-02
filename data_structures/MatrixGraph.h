@@ -19,7 +19,7 @@ public:
     }
 
     int getNumVertex(){
-        return numVertex;
+        return numVertex + 1;
     }
 
     // Return a reference to the distMatrix to make it mutable
@@ -53,7 +53,7 @@ public:
     }
     std::vector<int> getAdj(int v){
         std::vector<int> res;
-        for(int i = 0; i <= numVertex; i++){
+        for(int i = 0; i < numVertex; i++){
             if((*distMatrix)[v][i] < 0) continue;
             else res.push_back(i);
         }

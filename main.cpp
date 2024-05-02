@@ -4,11 +4,11 @@
 #include <iostream>
 
 int main(){
-    /*fully connected  stadiums.csv, tourism.csv), not fully connected (shipping.csv) */
+
     MGraph g;
 
     Parser("stadiums.csv", g);
-    for(int i = 0; i < g.getNumVertex() + 1; i++){
+    for(int i = 0; i <= g.getNumVertex(); i++){
         for(auto el : g.getAdj(i)){
             cout << el << " ";
         }
