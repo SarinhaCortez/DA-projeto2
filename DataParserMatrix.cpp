@@ -53,6 +53,9 @@ void MToyGraphParser(const string& filename, MGraph &g) {
 void MExtraMSGraphParser(const string& edge_filename, MGraph &g){
 
     string line; int maximum = 0;
+
+    /* o primeiro while loop serve apenas para limitar os nós a usar, caso contrário
+     * a matriz fica com muito espaço inutilizado*/
     ifstream edgescut("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename+".csv");
 
     if (!edgescut.is_open()) {
@@ -74,10 +77,10 @@ void MExtraMSGraphParser(const string& edge_filename, MGraph &g){
 
         maximum = max(maximum, max(orig, dest));
     }
-    g.updateMatrixDim(maximum);// este while loop serviu apenas para cortar o grafo
+    g.updateMatrixDim(maximum);
     edgescut.close();
 
-
+    /*o segundo atualiza a latitude e a longitude dos nós usados*/
     ifstream nodes("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/nodes.csv");
 
     if (!nodes.is_open()) {
@@ -104,6 +107,7 @@ void MExtraMSGraphParser(const string& edge_filename, MGraph &g){
     }
     nodes.close();
 
+    /*o terceiro preenche a matriz*/
     ifstream edges("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename+".csv");
 
     if (!edges.is_open()) {
