@@ -34,6 +34,7 @@ void ToyGraphParser(const string& filename, Graph<int> &g) {
             }
 
             g.addEdge(origin, destination, distance);
+            g.addEdge(destination, origin, distance);
         }
 
         csv.close();

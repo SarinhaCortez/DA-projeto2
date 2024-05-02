@@ -4,13 +4,13 @@
 int main(){
     /*fully connected  stadiums.csv, tourism.csv), not fully connected (shipping.csv) */
     Graph<int> g;
-    Parser("stadiums.csv", g);
+    Parser("shipping.csv", g);
     Vertex<int> * initial;
     for(auto v: g.getVertexSet()){
         v->setVisited(false);
         if(v->getInfo()==0){
             initial=v;
-            initial->setVisited(true);
+            //initial->setVisited(true);
         }
     }
 
@@ -33,7 +33,7 @@ int main(){
         }
     }
     else{
-        cout<<"Ta mal lol"<<endl;
+        cout<<"nao existe"<<endl;
     }
 
         //Parser("edges_25.csv", g);
