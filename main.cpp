@@ -1,11 +1,24 @@
 //#include "DataParser.h"
 #include "DataParserMatrix.h"
 #include "Utils.h"
+#include <iostream>
 
 int main(){
     /*fully connected  stadiums.csv, tourism.csv), not fully connected (shipping.csv) */
-    Graph g;
-    Parser("stadiums.csv", g);
+    MGraph g;
+
+    Parser("edges_25", g);/*
+    for(auto v : g.getVertexSet()){
+        cout << "First: " << v.first << "Latitude: " << v.second.first << "Longitude: "<<v.second.second;
+    }*/int n = 0;
+    for(auto v : (*g.getDistMatrix())){
+        for(auto d : v){
+            cout << d <<" ";
+        }cout << endl;
+    }
+
+
+    /*
     Vertex<int> * initial;
     for(auto v: g.getVertexSet()){
         v->setVisited(false);
@@ -19,7 +32,7 @@ int main(){
         for(auto edge: v->getAdj() ){
             cout<<edge->getOrig()->getInfo()<<"----->"<<edge->getDest()->getInfo()<<endl;
         }
-    }*/
+    }
     std::vector<Vertex<int> *> tsp;
     std::vector<Vertex<int> *> final;
     int numVertex = g.getNumVertex();

@@ -4,7 +4,7 @@
 
 #include "DataParserMatrix.h"
 
-void MToyGraphParser(const string& filename, Graph &g) {
+void MToyGraphParser(const string& filename, MGraph &g) {
     ifstream csv("../dataset/Toy-Graphs/Toy-Graphs/" + filename);
     int maximum = 0;
     if (!csv.is_open()) {
@@ -26,8 +26,11 @@ void MToyGraphParser(const string& filename, Graph &g) {
     }
 
     g.updateMatrixDim(maximum);
+    csv.close();
+    ifstream csv2("../dataset/Toy-Graphs/Toy-Graphs/" + filename);
 
-    while (getline(csv, line)) {
+    getline(csv2, line);
+    while (getline(csv2, line)) {
         istringstream ss(line);
         string origin_str, destination_str, distance_str;
 
@@ -39,15 +42,15 @@ void MToyGraphParser(const string& filename, Graph &g) {
         int destination = stoi(destination_str);
         double distance = stod(distance_str);
 
-        g.getDistMatrix()[origin][destination] = distance;
-        g.getDistMatrix()[destination][origin] = distance;
+        (*g.getDistMatrix())[origin][destination] = distance;
+        (*g.getDistMatrix())[destination][origin] = distance;
     }
 
-    csv.close();
+    csv2.close();
 }
 
 
-void MExtraMSGraphParser(const string& edge_filename, Graph &g){
+void MExtraMSGraphParser(const string& edge_filename, MGraph &g){
 
     string line;
 
@@ -78,12 +81,12 @@ void MExtraMSGraphParser(const string& edge_filename, Graph &g){
     nodes.close();
     g.updateMatrixDim(maximum);
 
-    ifstream edges("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename);
+    ifstream edges("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename+".csv");
 
     if (!edges.is_open()) {
         cerr << "Error opening edges file!" << endl;
     }
-
+    line = "";
     while (getline(edges, line)) {
 
         istringstream ss(line);
@@ -97,8 +100,8 @@ void MExtraMSGraphParser(const string& edge_filename, Graph &g){
         int dest = stoi(dest_str);
         double dist = stod(dist_str);
 
-        g.getDistMatrix()[orig][dest] = dist;
-        g.getDistMatrix()[dest][orig] = dist;
+        (*g.getDistMatrix())[orig][dest] = dist;
+        (*g.getDistMatrix())[dest][orig] = dist;
         //edges se não existirem ficam a -1
     }
 
@@ -106,7 +109,7 @@ void MExtraMSGraphParser(const string& edge_filename, Graph &g){
 
 }
 
-void MRealWorldGraphParser(const string& dir_name, Graph &g){
+void MRealWorldGraphParser(const string& dir_name, MGraph &g){
 
     string line;
     ifstream nodes("../dataset/Real-World-Graphs/Real-World-Graphs/"+ dir_name + "/nodes.csv");
@@ -155,14 +158,14 @@ void MRealWorldGraphParser(const string& dir_name, Graph &g){
         int dest = stoi(dest_str);
         double dist = stod(dist_str);
 
-        g.getDistMatrix()[orig][dest] = dist;
-        g.getDistMatrix()[dest][orig] = dist;
+        (*g.getDistMatrix())[orig][dest] = dist;
+        (*g.getDistMatrix())[dest][orig] = dist;
         //edges se não existirem ficam a -1
     }
     edges.close();
 }
 
-void Parser(const string& path, Graph &g){
+void Parser(const string& path, MGraph &g){
     int s = path.size();
     if(path[0] == 'e')
         MExtraMSGraphParser(path, g);

@@ -5,34 +5,46 @@
 #include <unordered_map>
 #include <utility>
 
-/*
-class Vertex{
-    int index, lat, longi;
+class MGraph {
+    std::vector<std::vector<double>>* distMatrix; // Change to pointer
+    std::unordered_map<int, std::pair<double, double>> vertexSet; // First is latitude, second is longitude
 public:
-    Vertex(){index = -1;}
-    Vertex(int n) {index = n;}
-    int getlat() {return lat;}
-    int getLongi() {return longi;}
-};*/
+    MGraph(): distMatrix(new std::vector<std::vector<double>>()) {} // Initialize with empty vector
+    MGraph(int n) : distMatrix(new std::vector<std::vector<double>>(n, std::vector<double>(n, -1))) {}
 
-class Graph {
-    std::vector<std::vector<double>> distMatrix;
-    std::unordered_map<int, std::pair<double, double>> vertexSet; //first is latitude, second is longitude
-public:
-    Graph(): distMatrix(0, std::vector<double>(0, -1)) {}
-    Graph(int n) : distMatrix(n, std::vector<double>(n, -1)) {}
-    std::vector<std::vector<double>> getDistMatrix(){
+    // Destructor to free memory
+    ~MGraph() {
+        delete distMatrix;
+    }
+
+    // Return a reference to the distMatrix to make it mutable
+    std::vector<std::vector<double>>* getDistMatrix() {
         return distMatrix;
     }
-    void updateMatrixDim(int n){
-        distMatrix.clear();
-        distMatrix = std::vector<std::vector<double>>(n, std::vector<double>(n, -1));
+
+    // Update the dimensions of the distMatrix
+    void updateMatrixDim(int n) {
+        distMatrix->resize(n+1);
+        for (auto& row : *distMatrix) {
+            row.resize(n+1, -1);
+        }
     }
+
     void addVertex(int a,double b, double c){
         vertexSet.emplace(a, std::make_pair(b,c));
     }
 
+    std::unordered_map<int, std::pair<double, double>> getVertexSet(){
+        return vertexSet;
+    }
+
+    double getLatitude(int n){
+        return vertexSet[n].first;
+    }
+
+    double getLongitude(int n){
+        return vertexSet[n].second;
+    }
 };
 
 #endif //DA_PROJETO2_MATRIXGRAPH_H
-//trying to change this matrix thing
