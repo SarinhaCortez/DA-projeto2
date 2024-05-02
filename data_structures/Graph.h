@@ -31,7 +31,6 @@ public:
     unsigned int getIndegree() const;
     double getDist() const;
     Edge<T> *getPath() const;
-    std::vector<Edge<T> *> getIncoming() const;
 
     void setInfo(T info);
     void setVisited(bool visited);
@@ -58,8 +57,6 @@ protected:
     unsigned int indegree; // used by topsort
     double dist = 0;
     Edge<T> *path = nullptr;
-
-    std::vector<Edge<T> *> incoming; // incoming edges
 
     int queueIndex = 0; 		// required by MutablePriorityQueue and UFDS
 
@@ -164,7 +161,6 @@ template <class T>
 Edge<T> * Vertex<T>::addEdge(Vertex<T> *d, double w) {
     auto newEdge = new Edge<T>(this, d, w);
     adj.push_back(newEdge);
-    d->incoming.push_back(newEdge);
     return newEdge;
 }
 
@@ -260,11 +256,6 @@ double Vertex<T>::getDist() const {
 template <class T>
 Edge<T> *Vertex<T>::getPath() const {
     return this->path;
-}
-
-template <class T>
-std::vector<Edge<T> *> Vertex<T>::getIncoming() const {
-    return this->incoming;
 }
 
 template <class T>

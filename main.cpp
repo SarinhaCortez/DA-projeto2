@@ -1,9 +1,10 @@
-#include "DataParser.h"
+//#include "DataParser.h"
+#include "DataParserMatrix.h"
 #include "Utils.h"
 
 int main(){
     /*fully connected  stadiums.csv, tourism.csv), not fully connected (shipping.csv) */
-    Graph<int> g;
+    Graph g;
     Parser("stadiums.csv", g);
     Vertex<int> * initial;
     for(auto v: g.getVertexSet()){

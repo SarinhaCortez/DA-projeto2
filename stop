@@ -1,0 +1,426 @@
+[33mcommit cbf5dc0ee992cabebb61ff4bd3afb21bbbc28b7f[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: SarinhaCortez <up202205636@g.uporto.pt>
+Date:   Tue Apr 30 11:37:53 2024 +0100
+
+    .gitignore updated
+
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mindex dc36249..52b09c1 100644[m
+[1m--- a/.gitignore[m
+[1m+++ b/.gitignore[m
+[36m@@ -1,2 +1,3 @@[m
+ cmake-build-debug/[m
+ dataset/[m
+[32m+[m[32m.idea/[m
+
+[33mcommit 5244c97033472f59bc0301d2e02b7437005e8545[m
+Author: SarinhaCortez <up202205636@g.uporto.pt>
+Date:   Thu Apr 25 22:08:05 2024 +0100
+
+    parser super done
+
+[1mdiff --git a/DataParser.cpp b/DataParser.cpp[m
+[1mindex 1839fd9..bedba78 100644[m
+[1m--- a/DataParser.cpp[m
+[1m+++ b/DataParser.cpp[m
+[36m@@ -10,12 +10,10 @@[m [mvoid ToyGraphParser(const string& filename, Graph<int> &g) {[m
+     if (!csv.is_open()) {[m
+         cerr << "Error opening csv file!" << endl;[m
+     }[m
+[31m-[m
+[32m+[m[32m    unordered_set<int> seenVertices;[m
+     string line;[m
+     getline(csv, line);[m
+ [m
+[31m-    unordered_set<int> seenVertices;[m
+[31m-[m
+         while (getline(csv, line)) {[m
+             istringstream ss(line);[m
+             string origin_str, destination_str, distance_str;[m
+[1mdiff --git a/Utils.cpp b/Utils.cpp[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4bc48ef[m
+[1m--- /dev/null[m
+[1m+++ b/Utils.cpp[m
+[36m@@ -0,0 +1,5 @@[m
+[32m+[m[32m//[m
+[32m+[m[32m// Created by saracortez on 25/04/24.[m
+[32m+[m[32m//[m
+[32m+[m
+[32m+[m[32m#include "Utils.h"[m
+[1mdiff --git a/Utils.h b/Utils.h[m
+[1mnew file mode 100644[m
+[1mindex 0000000..59b071a[m
+[1m--- /dev/null[m
+[1m+++ b/Utils.h[m
+[36m@@ -0,0 +1,4 @@[m
+[32m+[m[32m#ifndef DA_PROJETO2_UTILS_H[m
+[32m+[m[32m#define DA_PROJETO2_UTILS_H[m
+[32m+[m
+[32m+[m[32m#endif //DA_PROJETO2_UTILS_H[m
+[1mdiff --git a/main.cpp b/main.cpp[m
+[1mindex fff6d39..ebb6b30 100644[m
+[1m--- a/main.cpp[m
+[1m+++ b/main.cpp[m
+[36m@@ -1,12 +1,14 @@[m
+ #include "DataParser.h"[m
+ [m
+ int main(){[m
+[31m-[m
+[32m+[m[32m    /*fully connected  stadiums.csv, tourism.csv), not fully connected (shipping.csv) */[m
+     Graph<int> g;[m
+     Parser("tourism.csv", g);[m
+     //Parser("edges_25.csv", g);[m
+     //Parser("graph1", g);[m
+[32m+[m[32m    /*[m
+     cout <<"Edges"<<endl;[m
+[32m+[m
+     for(auto v : g.getVertexSet()){[m
+         for(auto e : v->getAdj()){[m
+             cout << e->getWeight()<<endl;[m
+[36m@@ -17,4 +19,5 @@[m [mint main(){[m
+     for(auto v : g.getVertexSet()){[m
+         cout << v->getInfo()<<endl;[m
+     }[m
+[32m+[m[32m    */[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/menu.cpp b/menu.cpp[m
+[1mnew file mode 100644[m
+[1mindex 0000000..bf3e95e[m
+[1m--- /dev/null[m
+[1m+++ b/menu.cpp[m
+[36m@@ -0,0 +1,2 @@[m
+[32m+[m
+[32m+[m[32m#include "menu.h"[m
+[1mdiff --git a/menu.h b/menu.h[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4c78055[m
+[1m--- /dev/null[m
+[1m+++ b/menu.h[m
+[36m@@ -0,0 +1,10 @@[m
+[32m+[m[32m#ifndef DA_PROJETO2_MENU_H[m
+[32m+[m[32m#define DA_PROJETO2_MENU_H[m
+[32m+[m
+[32m+[m[32m#include "DataParser.h"[m
+[32m+[m
+[32m+[m[32mGraph<int> g;[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m#endif //DA_PROJETO2_MENU_H[m
+
+[33mcommit 093205bc94947b7774d4b180d4f0d80b60ba054f[m
+Author: SarinhaCortez <up202205636@g.uporto.pt>
+Date:   Thu Apr 25 21:42:08 2024 +0100
+
+    parser super done
+
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..dc36249[m
+[1m--- /dev/null[m
+[1m+++ b/.gitignore[m
+[36m@@ -0,0 +1,2 @@[m
+[32m+[m[32mcmake-build-debug/[m
+[32m+[m[32mdataset/[m
+[1mdiff --git a/CMakeLists.txt b/CMakeLists.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4b448dd[m
+[1m--- /dev/null[m
+[1m+++ b/CMakeLists.txt[m
+[36m@@ -0,0 +1,16 @@[m
+[32m+[m[32mcmake_minimum_required(VERSION 3.28)[m
+[32m+[m[32mproject(DA_projeto2)[m
+[32m+[m
+[32m+[m[32mset(CMAKE_CXX_STANDARD 14)[m
+[32m+[m
+[32m+[m[32minclude_directories(.)[m
+[32m+[m[32minclude_directories(data_structures)[m
+[32m+[m
+[32m+[m[32madd_executable(DA_projeto2[m
+[32m+[m[32m        data_structures/Graph.h[m
+[32m+[m[32m        data_structures/MutablePriorityQueue.h[m
+[32m+[m[32m        data_structures/UFDS.cpp[m
+[32m+[m[32m        data_structures/UFDS.h[m
+[32m+[m[32m        DataParser.cpp[m
+[32m+[m[32m        DataParser.h[m
+[32m+[m[32m        main.cpp)[m
+[1mdiff --git a/DataParser.cpp b/DataParser.cpp[m
+[1mnew file mode 100644[m
+[1mindex 0000000..1839fd9[m
+[1m--- /dev/null[m
+[1m+++ b/DataParser.cpp[m
+[36m@@ -0,0 +1,168 @@[m
+[32m+[m[32m//[m
+[32m+[m[32m// Created by saracortez on 25/04/24.[m
+[32m+[m[32m//[m
+[32m+[m
+[32m+[m[32m#include "DataParser.h"[m
+[32m+[m
+[32m+[m[32mvoid ToyGraphParser(const string& filename, Graph<int> &g) {[m
+[32m+[m[32m    ifstream csv("../dataset/Toy-Graphs/Toy-Graphs/" + filename);[m
+[32m+[m
+[32m+[m[32m    if (!csv.is_open()) {[m
+[32m+[m[32m        cerr << "Error opening csv file!" << endl;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    string line;[m
+[32m+[m[32m    getline(csv, line);[m
+[32m+[m
+[32m+[m[32m    unordered_set<int> seenVertices;[m
+[32m+[m
+[32m+[m[32m        while (getline(csv, line)) {[m
+[32m+[m[32m            istringstream ss(line);[m
+[32m+[m[32m            string origin_str, destination_str, distance_str;[m
+[32m+[m
+[32m+[m[32m            getline(ss, origin_str, ',');[m
+[32m+[m[32m            getline(ss, destination_str, ',');[m
+[32m+[m[32m            getline(ss, distance_str, ',');[m
+[32m+[m
+[32m+[m[32m            int origin = stoi(origin_str);[m
+[32m+[m[32m            int destination = stoi(destination_str);[m
+[32m+[m[32m            double distance = stod(distance_str);[m
+[32m+[m
+[32m+[m[32m            if (seenVertices.insert(origin).second) {[m
+[32m+[m[32m                g.addVertex(origin);[m
+[32m+[m[32m            }[m
+[32m+[m[32m            if (seenVertices.insert(destination).second) {[m
+[32m+[m[32m                g.addVertex(destination);[m
+[32m+[m[32m            }[m
+[32m+[m
+[32m+[m[32m            g.addEdge(origin, destination, distance);[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        csv.close();[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mvoid ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){[m
+[32m+[m
+[32m+[m[32m    string line;[m
+[32m+[m
+[32m+[m[32m    ifstream nodes("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/nodes.csv");[m
+[32m+[m
+[32m+[m[32m    if (!nodes.is_open()) {[m
+[32m+[m[32m        cerr << "Error opening nodes file!" << endl;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    getline(nodes, line);[m
+[32m+[m
+[32m+[m[32m    while (getline(nodes, line)) {[m
+[32m+[m[32m        istringstream ss(line);[m
+[32m+[m[32m        string id_str, longi_str, lat_str;[m
+[32m+[m
+[32m+[m[32m        getline(ss, id_str, ',');[m
+[32m+[m[32m        getline(ss, longi_str, ',');[m
+[32m+[m[32m        getline(ss, lat_str, ',');[m
+[32m+[m
+[32m+[m[32m        int id = stoi(id_str);[m
+[32m+[m[32m        double lon = stod(longi_str);[m
+[32m+[m[32m        double lat = stod(lat_str);[m
+[32m+[m
+[32m+[m[32m        g.addVertex(id);[m
+[32m+[m[32m        (*(g.getVertexSet().end()-1))->setLong(lon);[m
+[32m+[m[32m        (*(g.getVertexSet().end()-1))->setLat(lat);[m
+[32m+[m[32m    }[m
+[32m+[m[32m    nodes.close();[m
+[32m+[m
+[32m+[m[32m    ifstream edges("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename);[m
+[32m+[m
+[32m+[m[32m    if (!edges.is_open()) {[m
+[32m+[m[32m        cerr << "Error opening edges file!" << endl;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    while (getline(edges, line)) {[m
+[32m+[m
+[32m+[m[32m        istringstream ss(line);[m
+[32m+[m[32m        string orig_str, dest_str, dist_str;[m
+[32m+[m
+[32m+[m[32m        getline(ss, orig_str, ',');[m
+[32m+[m[32m        getline(ss, dest_str, ',');[m
+[32m+[m[32m        getline(ss, dist_str, ',');[m
+[32m+[m
+[32m+[m[32m        int orig = stoi(orig_str);[m
+[32m+[m[32m        int dest = stoi(dest_str);[m
+[32m+[m[32m        double dist = stod(dist_str);[m
+[32m+[m
+[32m+[m[32m        g.addEdge(orig, dist, dest);[m
+[32m+[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    edges.close();[m
+[32m+[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mvoid RealWorldGraphParser(const string& dir_name, Graph<int> &g){[m
+[32m+[m
+[32m+[m[32m    string line;[m
+[32m+[m[32m    ifstream nodes("../dataset/Real-World-Graphs/Real-World-Graphs/"+ dir_name + "/nodes.csv");[m
+[32m+[m
+[32m+[m[32m    if (!nodes.is_open()) {[m
+[32m+[m[32m        cerr << "Error opening nodes file!" << endl;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    getline(nodes, line);[m
+[32m+[m
+[32m+[m[32m    while (getline(nodes, line)) {[m
+[32m+[m[32m        istringstream ss(line);[m
+[32m+[m[32m        string id_str, longi_str, lat_str;[m
+[32m+[m
+[32m+[m[32m        getline(ss, id_str, ',');[m
+[32m+[m[32m        getline(ss, longi_str, ',');[m
+[32m+[m[32m        getline(ss, lat_str, ',');[m
+[32m+[m
+[32m+[m[32m        int id = stoi(id_str);[m
+[32m+[m[32m        double lon = stod(longi_str);[m
+[32m+[m[32m        double lat = stod(lat_str);[m
+[32m+[m
+[32m+[m[32m        g.addVertex(id);[m
+[32m+[m[32m        (*(g.getVertexSet().end()-1))->setLong(lon);[m
+[32m+[m[32m        (*(g.getVertexSet().end()-1))->setLat(lat);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    nodes.close();[m
+[32m+[m[32m    ifstream edges("../dataset/Real-World-Graphs/Real-World-Graphs/"+ dir_name + "/edges.csv");[m
+[32m+[m
+[32m+[m[32m    if (!edges.is_open()) {[m
+[32m+[m[32m        cerr << "Error opening edges file!" << endl;[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    getline(edges, line);[m
+[32m+[m
+[32m+[m[32m    while (getline(edges, line)) {[m
+[32m+[m
+[32m+[m[32m        istringstream ss(line);[m
+[32m+[m[32m        string orig_str, dest_str, dist_str;[m
+[32m+[m
+[32m+[m[32m        getline(ss, orig_str, ',');[m
+[32m+[m[32m        getline(ss, dest_str, ',');[m
+[32m+[m[32m        getline(ss, dist_str, ',');[m
+[32m+[m
+[32m+[m[32m        int orig = stoi(orig_str);[m
+[32m+[m[32m        int dest = stoi(dest_str);[m
+[32m+[m[32m        double dist = stod(dist_str);[m
+[32m+[m
+[32m+[m[32m        g.addEdge(orig, dist, dest);[m
+[32m+[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    edges.close();[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mvoid Parser(const string& path, Graph<int> &g){[m
+[32m+[m[32m    int s = path.size();[m
+[32m+[m[32m    if(path[0] == 'e')[m
+[32m+[m[32m        ExtraMSGraphParser(path, g);[m
+[32m+[m[32m    else if(path[s-1] == 'v')[m
+[32m+[m[32m        ToyGraphParser(path, g);[m
+[32m+[m[32m    else[m
+[32m+[m[32m        RealWorldGraphParser(path, g);[m
+[32m+[m[32m}[m
+[32m+[m
+[1mdiff --git a/DataParser.h b/DataParser.h[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8d1b9dd[m
+[1m--- /dev/null[m
+[1m+++ b/DataParser.h[m
+[36m@@ -0,0 +1,22 @@[m
+[32m+[m[32m#ifndef DA_PROJETO2_DATAPARSER_H[m
+[32m+[m[32m#define DA_PROJETO2_DATAPARSER_H[m
+[32m+[m
+[32m+[m[32m#include "data_structures/Graph.h"[m
+[32m+[m[32m#include <string>[m
+[32m+[m[32m#include <fstream>[m
+[32m+[m[32m#include <sstream>[m
+[32m+[m[32m#include <iostream>[m
+[32m+[m[32m#include <unordered_set>[m
+[32m+[m
+[32m+[m[32musing namespace std;[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Toy Graph parser receives the name of a file xxxxx.csv[m
+[32m+[m[32m * Extra receives a name in the form "edges_XXXX.csv"[m
+[32m+[m[32m * RW receives the name of a directory[m
+[32m+[m[32m * based on this informations, Parser knows which funct to call[m
+[32m+[m[32m */[m
+[32m+[m[32mvoid ToyGraphParser(const string& filename, Graph<int> &g);[m
+[32m+[m[32mvoid ExtraMSGraphParser(const string& edge_filename, Graph<int> &g);[m
+[32m+[m[32mvoid RealWorldGraphParser(const string& dir_name, Graph<int> &g);[m
+[32m+[m[32mvoid Parser(const string& path, Graph<int> &g); //a wrap[m
+[32m+[m[32m#endif //DA_PROJETO2_DATAPARSER_H[m
+[1mdiff --git a/data_structures/Graph.h b/data_structures/Graph.h[m
+[1mnew file mode 100644[m
+[1mindex 0000000..baf63c6[m
+[1m--- /dev/null[m
+[1m+++ b/data_structures/Graph.h[m
+[36m@@ -0,0 +1,698 @@[m
+[32m+[m[32m// Original code by Gonçalo Leão[m[41m[m
+[32m+[m[32m// Updated by DA 2023/2024 Team[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m#ifndef DA_TP_CLASSES_GRAPH[m[41m[m
+[32m+[m[32m#define DA_TP_CLASSES_GRAPH[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m#include <iostream>[m[41m[m
+[32m+[m[32m#include <vector>[m[41m[m
+[32m+[m[32m#include <queue>[m[41m[m
+[32m+[m[32m#include <limits>[m[41m[m
+[32m+[m[32m#include <algorithm>[m[41m[m
+[32m+[m[32m#include "../data_structures/MutablePriorityQueue.h"[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mtemplate <class T>[m[41m[m
+[32m+[m[32mclass Edge;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m#define INF std::numeric_limits<double>::max()[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m/************************* Vertex  **************************/[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mtemplate <class T>[m[41m[m
+[32m+[m[32mclass Vertex {[m[41m[m
+[32m+[m[32mpublic:[m[41m[m
+[32m+[m[32m    Vertex(T in);[m[41m[m
+[32m+[m[32m    bool operator<(Vertex<T> & vertex) const; // // required by MutablePriorityQueue[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    T getInfo() const;[m[41m[m
+[32m+[m[32m    std::vector<Edge<T> *> getAdj() const;[m[41m[m
+[32m+[m[32m    bool isVisited() const;[m[41m[m
+[32m+[m[32m    bool isProcessing() const;[m[41m[m
+[32m+[m[32m    unsigned int getIndegree() const;[m[41m[m
+[32m+[m[32m    double getDist() const;[m[41m[m
+[32m+[m[32m    Edge<T> *getPath() const;[m[41m[m
+[32m+[m[32m    std::vector<Edge<T> *> getIncoming() const;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    void setInfo(T info);[m[41m[m
+[32m+[m[32m    void setVisited(bool visited);[m[41m[m
+[32m+[m[32m    void setProcesssing(bool processing);[m[41m[m
+[32m+[m[32m    void setIndegree(unsigned int indegree);[m[41m[m
+[32m+[m[32m    void setDist(double dist);[m[41m[m
+[32m+[m[32m    void setPath(Edge<T> *path);[m[41m[m
+[32m+[m[32m    Edge<T> * addEdge(Vertex<T> *dest, double w);[m[41m[m
+[32m+[m[32m    bool removeEdge(T in);[m[41m[m
+[32m+[m[32m    void removeOutgoingEdges();[m[41m[m
+[32m+[m[32m    void setLat(double lat);[m[41m[m
+[32m+[m[32m    void setLong(double longit);[m[41m[m
+[32m+[m[32m    int getLat()const ;[m[41m[m
+[32m+[m[32m    int getLong()const ;[m[41m[m
+[32m+[m[32m    friend class MutablePriorityQueue<Vertex>;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mprotected:[m[41m[m
+[32m+[m[32m    T info;                // info node[m[41m[m
+[32m+[m[32m    // outgoing edges[m[41m[m
+[32m+[m[32m    std::vector<Edge<T> *> adj;[m[41m[m
+[32m+[m[32m    // auxiliary fields[m[41m[m
+[32m+[m[32m    bool visited = false; // used by DFS, BFS, Prim ...[m[41m[m
+[32m+[m[32m    bool processing = false; // used by isDAG (in addition to the visited attribute)[m[41m[m
+[32m+[m[32m    unsigned int indegree; // used by topsort[m[41m[m
+[32m+[m[32m    double dist = 0;[m[41m[m
+[32m+[m[32m    Edge<T> *path = nullptr;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    std::vector<Edge<T> *> incoming; // incoming edges[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    int queueIndex = 0; 		// required by MutablePriorityQueue and UFDS[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    void deleteEdge(Edge<T> *edge);[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    double latitude = 0.0, longitude = 0.0; //for not toy graphs[m[41m[m
+[32m+[m[32m};[m[41m[m
+[32m+[m[41m[
