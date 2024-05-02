@@ -52,14 +52,38 @@ void MToyGraphParser(const string& filename, MGraph &g) {
 
 void MExtraMSGraphParser(const string& edge_filename, MGraph &g){
 
-    string line;
+    string line; int maximum = 0;
+    ifstream edgescut("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename+".csv");
+
+    if (!edgescut.is_open()) {
+        cerr << "Error opening edges file!" << endl;
+    }
+
+    while (getline(edgescut, line)) {
+
+        istringstream ss(line);
+        string orig_str, dest_str, dist_str;
+
+        getline(ss, orig_str, ',');
+        getline(ss, dest_str, ',');
+        getline(ss, dist_str, ',');
+
+        int orig = stoi(orig_str);
+        int dest = stoi(dest_str);
+        double dist = stod(dist_str);
+
+        maximum = max(maximum, max(orig, dest));
+    }
+    g.updateMatrixDim(maximum);// este while loop serviu apenas para cortar o grafo
+    edgescut.close();
+
 
     ifstream nodes("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/nodes.csv");
 
     if (!nodes.is_open()) {
         cerr << "Error opening nodes file!" << endl;
     }
-    int maximum = 0;
+
     getline(nodes, line);
 
     while (getline(nodes, line)) {
@@ -72,21 +96,20 @@ void MExtraMSGraphParser(const string& edge_filename, MGraph &g){
         getline(ss, lat_str, ',');
 
         int id = stoi(id_str);
-        maximum = max(maximum,id);
+        if(id > maximum) continue;
         double lon = stod(longi_str);
         double lat = stod(lat_str);
 
         g.addVertex(id, lon, lat);
     }
     nodes.close();
-    g.updateMatrixDim(maximum);
 
     ifstream edges("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename+".csv");
 
     if (!edges.is_open()) {
         cerr << "Error opening edges file!" << endl;
     }
-    line = "";
+
     while (getline(edges, line)) {
 
         istringstream ss(line);
