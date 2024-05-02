@@ -11,7 +11,7 @@ class MGraph {
     int numVertex;
 public:
     MGraph(): distMatrix(new std::vector<std::vector<double>>()), numVertex(0) {} // Initialize with empty vector
-    MGraph(int n) : distMatrix(new std::vector<std::vector<double>>(n, std::vector<double>(n, -1))), numVertex(n) {}
+    MGraph(int n) : distMatrix(new std::vector<std::vector<double>>(n + 1, std::vector<double>(n + 1, -1))), numVertex(n + 1) {}
 
     // Destructor to free memory
     ~MGraph() {
@@ -19,7 +19,7 @@ public:
     }
 
     int getNumVertex(){
-        return numVertex + 1;
+        return numVertex;
     }
 
     // Return a reference to the distMatrix to make it mutable
@@ -33,11 +33,11 @@ public:
         for (auto& row : *distMatrix) {
             row.resize(n+1, -1);
         }
-        numVertex = n;
+        numVertex = n + 1;
     }
 
     void addVertex(int a,double b, double c){
-        vertexSet.emplace(a, std::make_pair(b,c));
+        vertexSet[a] = std::make_pair(b,c);
     }
 
     std::unordered_map<int, std::pair<double, double>> getVertexSet(){

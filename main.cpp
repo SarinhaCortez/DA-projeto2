@@ -8,7 +8,7 @@ int main(){
     MGraph g;
 
     Parser("stadiums.csv", g);
-    for(int i = 0; i <= g.getNumVertex(); i++){
+    for(int i = 0; i < g.getNumVertex(); i++){
         for(auto el : g.getAdj(i)){
             cout << el << " ";
         }
