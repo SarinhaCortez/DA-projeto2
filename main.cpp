@@ -2,6 +2,7 @@
 #include "DataParserMatrix.h"
 #include "Utils.h"
 #include <iostream>
+#include <set>
 
 int main(){
 
@@ -19,6 +20,36 @@ int main(){
         for(auto d : v){
             cout << d <<" ";
         }cout << endl;
+    }
+    
+        MGraph g;
+
+    Parser("tourism.csv", g);
+    for(int i = 0; i < g.getNumVertex(); i++){
+        for(auto el : g.getAdj(i)){
+            cout << el << "  ";
+        }
+        cout << endl;
+    }
+
+    int initial =0;
+    std::vector<int> tsp;
+    std::vector<int> final;
+    int numVertex=g.getNumVertex();
+    tsp.push_back(initial);
+    int dist=0;
+    int minDist=INT_MAX;
+    bool found=false;
+
+    std::set<int>visited;
+
+    if(BacktrakingTSP(g, dist, minDist, tsp, final, numVertex, initial, found, visited)){
+        for(auto vertex: final){
+            cout<<vertex<<endl;
+        }
+    }
+    else{
+        cout<<"nao existe lol"<<endl;
     }
 
 

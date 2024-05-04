@@ -44,6 +44,14 @@ public:
         void addVertex(int a,double b, double c){
             vertexSet[a] = std::make_pair(b,c);
         }
+        return res;
+    }
+
+    int getWeight(int origin, int dest){
+        return (*distMatrix)[origin][dest];
+    }
+};
+
 
         std::unordered_map<int, std::pair<double, double>> getVertexSet(){
             return vertexSet;
