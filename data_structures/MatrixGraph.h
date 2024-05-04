@@ -59,6 +59,10 @@ public:
         }
         return res;
     }
+
+    int getWeight(int origin, int dest){
+        return (*distMatrix)[origin][dest];
+    }
 };
 
 #endif //DA_PROJETO2_MATRIXGRAPH_H
