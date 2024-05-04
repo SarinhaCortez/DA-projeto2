@@ -5,9 +5,34 @@
 #include <unordered_map>
 #include <utility>
 
+class Vertex{
+    int latitude = 0;
+    int longitude = 0;
+    bool visited = false;
+
+public:
+    double getLatitude(){
+        return latitude;
+    }
+
+    double getLongitude(){
+        return longitude;
+    }
+    bool isVisited(){
+        return visited;
+    }
+    void setVisited(bool v){
+        visited = v;
+    }
+
+    Vertex(){}
+    Vertex(int lat, int lon): latitude(lat), longitude(lon){}
+};
+
+
 class MGraph {
     std::vector<std::vector<double>>* distMatrix; // Change to pointer
-    std::unordered_map<int, std::pair<double, double>> vertexSet; // First is latitude, second is longitude
+    std::unordered_map<int, Vertex> vertexSet; // First is latitude, second is longitude
     int numVertex;
 public:
     MGraph(): distMatrix(new std::vector<std::vector<double>>()), numVertex(0) {} // Initialize with empty vector
@@ -37,19 +62,19 @@ public:
     }
 
     void addVertex(int a,double b, double c){
-        vertexSet[a] = std::make_pair(b,c);
+        vertexSet[a] = Vertex(b,c);
     }
 
-    std::unordered_map<int, std::pair<double, double>> getVertexSet(){
+    std::unordered_map<int, Vertex> getVertexSet(){
         return vertexSet;
     }
 
     double getLatitude(int n){
-        return vertexSet[n].first;
+        return vertexSet[n].getLatitude();
     }
 
     double getLongitude(int n){
-        return vertexSet[n].second;
+        return vertexSet[n].getLongitude();
     }
     std::vector<int> getAdj(int v){
         std::vector<int> res;
