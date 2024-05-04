@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <utility>
 
-class Vertex{
+class MVertex{
     int latitude = 0;
     int longitude = 0;
     bool visited = false;
@@ -25,14 +25,13 @@ public:
         visited = v;
     }
 
-    Vertex(){}
-    Vertex(int lat, int lon): latitude(lat), longitude(lon){}
+    MVertex(){}
+    MVertex(int lat, int lon): latitude(lat), longitude(lon){}
 };
-
 
 class MGraph {
     std::vector<std::vector<double>>* distMatrix; // Change to pointer
-    std::unordered_map<int, Vertex> vertexSet; // First is latitude, second is longitude
+    std::unordered_map<int, MVertex> vertexSet; // First is latitude, second is longitude
     int numVertex;
 public:
     MGraph(): distMatrix(new std::vector<std::vector<double>>()), numVertex(0) {} // Initialize with empty vector
@@ -62,10 +61,10 @@ public:
     }
 
     void addVertex(int a,double b, double c){
-        vertexSet[a] = Vertex(b,c);
+        vertexSet[a] = MVertex(b,c);
     }
 
-    std::unordered_map<int, Vertex> getVertexSet(){
+    std::unordered_map<int, MVertex> getVertexSet(){
         return vertexSet;
     }
 

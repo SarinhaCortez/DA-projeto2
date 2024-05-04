@@ -7,19 +7,19 @@ int main(){
 
     MGraph g;
 
-    Parser("stadiums.csv", g);
+    Parser("stadiums.csv", g);/*
     for(int i = 0; i < g.getNumVertex(); i++){
         for(auto el : g.getAdj(i)){
             cout << el << " ";
         }
         cout << endl;
     }
-/*
+*/
     for(auto v : (*g.getDistMatrix())){
         for(auto d : v){
             cout << d <<" ";
         }cout << endl;
-    }*/
+    }
 
 
     /*
