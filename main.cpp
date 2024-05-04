@@ -21,8 +21,6 @@ int main(){
             cout << d <<" ";
         }cout << endl;
     }
-    
-        MGraph g;
 
     Parser("tourism.csv", g);
     for(int i = 0; i < g.getNumVertex(); i++){
