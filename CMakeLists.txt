@@ -17,4 +17,6 @@ add_executable(DA_projeto2
         Utils.cpp
         data_structures/MatrixGraph.h
         DataParserMatrix.cpp
-        DataParserMatrix.h)
+        DataParserMatrix.h
+        menu.h
+        menu.cpp)

@@ -9,6 +9,7 @@ using namespace std;
 
 using namespace std;
 
+
 bool BacktrakingTSP(MGraph &g, int &dist, int &minDist, std::vector<int> &tsp, std::vector<int> &final, int &numVertex, int vertex, bool&found, std::set<int> &visited){
 
     bool final_found = false;
