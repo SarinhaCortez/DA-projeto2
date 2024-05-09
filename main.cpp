@@ -1,12 +1,14 @@
 //#include "DataParser.h"
 #include "DataParserMatrix.h"
 #include "Utils.h"
+#include "menu.h"
 #include <iostream>
 #include <set>
 
 int main(){
-
-    MGraph g;
+    Menu menu;
+    menu.openMenu();
+    /*MGraph g;
 
     Parser("tourism.csv", g);
    /* for(int i = 0; i < g.getNumVertex(); i++){
@@ -16,7 +18,7 @@ int main(){
         cout << endl;
     }*/
 
-    std::vector<std::vector<double>>* matrix = g.getDistMatrix();
+    /*std::vector<std::vector<double>>* matrix = g.getDistMatrix();
     std::vector<int> tsp;
     tsp.push_back(0);
     nearestNeighbour(g, tsp, matrix);
@@ -42,7 +44,7 @@ int main(){
         }
         cout << endl;
     }*/
-
+/*
     int initial =0;
     std::vector<int> tspB;
     std::vector<int> final;
