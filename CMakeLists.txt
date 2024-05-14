@@ -19,4 +19,7 @@ add_executable(DA_projeto2
         DataParserMatrix.cpp
         DataParserMatrix.h
         menu.h
-        menu.cpp)
+        menu.cpp
+        haversine.cpp
+        haversine.h
+        TSPSolver.h)

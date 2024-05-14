@@ -4,6 +4,8 @@
 #include "DataParser.h"
 #include "DataParserMatrix.h"
 #include "Utils.h"
+#include <climits>
+
 
 
 class Menu{
