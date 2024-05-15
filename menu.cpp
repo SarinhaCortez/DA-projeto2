@@ -79,7 +79,11 @@ void Menu::initialOptions() {
         wait();
     }
     if (option == "2") {
-        cout<<"A ser tratado"<<endl;
+        for(auto v : (*g.getDistMatrix())){
+      for(auto d : v){
+          cout << d <<" ";
+      }cout << endl;
+  }
         wait();
     }
     if (option == "3") {

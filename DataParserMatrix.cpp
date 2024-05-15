@@ -3,6 +3,7 @@
 //
 
 #include "DataParserMatrix.h"
+#include <cmath>
 
 void MToyGraphParser(const string& filename, MGraph &g) {
     ifstream csv("../dataset/Toy-Graphs/Toy-Graphs/" + filename);
@@ -48,7 +49,44 @@ void MToyGraphParser(const string& filename, MGraph &g) {
 
     csv2.close();
 }
+const double pi = 3.14159265358979323846;
+const double earthRadius = 6371000;
+double convert_to_radians(double coord){
+return coord*pi/180.;}
 
+int harversineDistance(int node1, int node2, MGraph &g){
+    double lon1, lat1, lon2, lat2;
+    auto it1 = g.getVertexSet().find(node1);
+    if (it1 != g.getVertexSet().end()) {
+        std::pair<double, double> node1 = it1->second;
+        lon1 = node1.first;
+        lat1 = node1.second;
+    }
+    auto it2 = g.getVertexSet().find(node2);
+    if (it2 != g.getVertexSet().end()) {
+        std::pair<double, double> node2 = it2->second;
+        lon2 = node2.first;
+        lat2 = node2.second;
+    }
+
+    double rad_lat1 = convert_to_radians(lat1);
+    double rad_lon1 = convert_to_radians(lon1);
+    double rad_lat2 = convert_to_radians(lat2);
+    double rad_lon2 = convert_to_radians(lon2);
+
+
+    double delta_lat = rad_lat2 - rad_lat1;
+    double delta_lon = rad_lon2 - rad_lon1;
+
+    double a = std::sin(delta_lat / 2) * std::sin(delta_lat / 2) +
+               std::cos(rad_lat1) * std::cos(rad_lat2) *
+               std::sin(delta_lon / 2) * std::sin(delta_lon / 2);
+    double c = 2.0 * std::atan2(std::sqrt(a), std::sqrt(1.0 - a));
+
+    double distance = earthRadius * c;
+
+    return distance;
+}
 
 void MExtraMSGraphParser(const string& edge_filename, MGraph &g){
 
@@ -134,7 +172,17 @@ void MExtraMSGraphParser(const string& edge_filename, MGraph &g){
 
     edges.close();
 
+    for(int node1=0; node1<(*g.getDistMatrix()).size(); node1++){
+        for(int node2=0; node2<(*g.getDistMatrix()).size(); node2++){
+            if(node1!=node2 &&  (*g.getDistMatrix())[node1][node2] == -1){
+                (*g.getDistMatrix())[node1][node2] = harversineDistance(node1, node2, g);
+            }
+        }
+    }
+
 }
+
+
 
 void MRealWorldGraphParser(const string& dir_name, MGraph &g){
 
