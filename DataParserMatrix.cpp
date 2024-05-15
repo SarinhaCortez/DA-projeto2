@@ -238,6 +238,13 @@ void MRealWorldGraphParser(const string& dir_name, MGraph &g){
         //edges se não existirem ficam a -1
     }
     edges.close();
+    for(int node1=0; node1<(*g.getDistMatrix()).size(); node1++){
+        for(int node2=0; node2<(*g.getDistMatrix()).size(); node2++){
+            if(node1!=node2 &&  (*g.getDistMatrix())[node1][node2] == -1){
+                (*g.getDistMatrix())[node1][node2] = harversineDistance(node1, node2, g);
+            }
+        }
+    }
 }
 
 void Parser(const string& path, MGraph &g){
