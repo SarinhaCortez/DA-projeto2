@@ -390,7 +390,6 @@ void MRealWorldGraphParser(const string& dir_name, MGraph &g){
 }
 
 void Parser(const string& path, MGraph &g, bool haversine){
-    int s = path.size();
     if (path[0] == 'v' || path[0]=='t'){
         MToyGraphParser(path, g);}
 

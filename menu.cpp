@@ -102,7 +102,7 @@ void Menu::initialOptions() {
 
     if (option == "4") {
         cout << "Loading your answer as fast as a blast..." <<endl;
-        TSPSolver T(g, 10000, 0.99, 10000);
+        TSPSolver T(g2, 10000, 0.99, 10000);
         cout << "Here's the Traveling Sales-Woman Journey!";
         double bestCost;
         std::vector<int> res = T.solve(bestCost);
