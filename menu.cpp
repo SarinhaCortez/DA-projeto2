@@ -33,6 +33,7 @@ void Menu::chooseGraph(){
     cout << "Graph: "; cin >> option; cout << endl;
 
     Parser(option, g);
+    // se abertura do graph falhar não pode passar ao seguinte!
     initialOptions();
 }
 

@@ -2,6 +2,7 @@
 #define DA_PROJETO2_MENU_H
 
 #include "DataParser.h"
+#include <climits>
 #include "DataParserMatrix.h"
 #include "Utils.h"
 

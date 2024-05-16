@@ -13,10 +13,7 @@ public:
     MGraph(): distMatrix(new std::vector<std::vector<double>>()), numVertex(0) {} // Initialize with empty vector
     MGraph(int n) : distMatrix(new std::vector<std::vector<double>>(n + 1, std::vector<double>(n + 1, -1))), numVertex(n + 1) {}
 
-    // Destructor to free memory
-    ~MGraph() {
-        delete distMatrix;
-    }
+
 
     int getNumVertex(){
         return numVertex;

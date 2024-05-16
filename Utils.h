@@ -2,9 +2,17 @@
 #define DA_PROJETO2_UTILS_H
 
 #include "data_structures/MatrixGraph.h"
+#include "data_structures/Graph.h"
+
 #include <vector>
 #include <set>
 #include <iostream>
+#include <climits>
+#include <random>
+#include <algorithm>
+#include <queue>
+
+
 using namespace std;
 
 bool BacktrakingTSP(MGraph &g, int &dist, int &minDist, std::vector<int> &tsp, std::vector<int> &final, int &numVertex, int vertex, bool&found, std::set<int> &visited);
@@ -12,8 +20,11 @@ bool BacktrakingTSP(MGraph &g, int &dist, int &minDist, std::vector<int> &tsp, s
 bool notPresent(int i, std::vector<int> &tsp);
 pair<int, int> minDist(std::vector<double> currentRow, std::vector<int> &tsp);
 bool nearestNeighbour(MGraph &g,  std::vector<int> &tsp, std::vector<std::vector<double>>* matrix);
-
-
+vector<Vertex<int> *> prim(Graph<int>& g);
+void printPrim(Graph<int>& g);
+void preOrder(vector<Vertex<int> *> vertexSet, Vertex<int>* v0, vector<Vertex<int>*>& tour);
+double calculateTourDistance(const vector<Vertex<int>*>& tour);
+void triangularApproximation(Graph<int> &g);
 /*
 double distanceNodes(pair<int, std::pair<double, double>>& point1, pair<int, std::pair<double, double>>& point2);
 void assignClusters(std::vector<pair<int, std::pair<double, double>>>& data,  vector<pair<int, std::pair<double, double>>>& centroids, vector<pair<int, int>>& labels);

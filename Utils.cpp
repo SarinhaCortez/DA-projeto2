@@ -1,9 +1,4 @@
 #include "Utils.h"
-#include "data_structures/MatrixGraph.h"
-#include <vector>
-#include <iostream>
-#include <random>
-#include <algorithm>
 
 using namespace std;
 
@@ -403,3 +398,115 @@ std::pair<int, int> findClosestNodes(const std::vector<Point>& cluster1, const s
     return closestNodes;
 }
 */
+
+
+
+/*void printPrim(Graph<int>& g){
+    auto vec = prim(g);
+    for (auto x: vec){
+        if(x->getPath()!= nullptr){
+            auto e1 = x->getPath();
+            for(auto y: vec){
+                for (auto e2: y->getAdj()){
+                    if (e2 == e1){
+                        cout << "edge: " << y->getInfo() << " - " << e1->getDest()->getInfo() << endl;
+                    }
+                }
+            }
+
+        }
+    }
+}
+*/
+
+
+
+void preOrder(vector<Vertex<int> *> vertexSet, Vertex<int>* v0, vector<Vertex<int>*>& tour){
+    v0->setVisited(true);
+    tour.push_back(v0);
+    for(auto e: v0->getAdj()){
+        auto v2 = e->getDest();
+        if (!v2->isVisited()){
+            preOrder(vertexSet, v2, tour);
+            tour.push_back(v2);
+        }
+    }
+    return;
+}
+
+
+
+vector<Vertex<int> *> prim(Graph<int>& g) {
+// Check if the graph is empty
+    if (g.getVertexSet().empty()) {
+        return g.getVertexSet();
+    }
+
+    for(auto v : g.getVertexSet()) {
+        v->setDist(INF);
+        v->setPath(nullptr);
+        v->setVisited(false);
+    }
+
+    Vertex<int>* s = g.findVertex(0);
+    s->setDist(0);
+
+    MutablePriorityQueue<Vertex<int>> q;
+    q.insert(s);
+
+    while( ! q.empty() ) {
+
+        auto v = q.extractMin();
+        v->setVisited(true);
+
+        for(auto &e : v->getAdj()) {
+            Vertex<int>* w = e->getDest();
+            if (!w->isVisited()) {
+                auto oldDist = w->getDist();
+                if(e->getWeight() < oldDist) {
+                    w->setDist(e->getWeight());
+                    w->setPath(e);
+                    if (oldDist == INF) {
+                        q.insert(w);
+                    }
+                    else {
+                        q.decreaseKey(w);
+                    }
+                }
+            }
+        }
+    }
+    return g.getVertexSet();
+}
+
+double calculateTourDistance(const vector<Vertex<int>*>& tour) {
+    double totalDistance = 0.0;
+
+    for (int x = 0; x < tour.size() - 1; ++x) {
+
+        for (auto& e : tour[x]->getAdj()) {
+            if (e->getDest() == tour[x + 1]) {
+                totalDistance += e->getWeight();
+                break;
+            }
+        }
+    }
+    totalDistance += tour.back()->getAdj()[0]->getWeight();
+    return totalDistance;
+}
+
+
+void triangularApproximation(Graph<int> &g) {
+
+    auto mst = prim(g);
+    vector<Vertex<int>*> tour;
+    for(auto x: mst){
+        x->setVisited(false);
+    }
+    preOrder(mst, mst[0], tour);
+
+    double tourDistance = calculateTourDistance(tour);
+    cout << "2 -Approximated distance: " << tourDistance << endl;
+
+}
+

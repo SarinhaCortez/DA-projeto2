@@ -1,13 +1,21 @@
-//#include "DataParser.h"
-#include "DataParserMatrix.h"
+#include "DataParser.h"
+#include "Graph.h"
+//#include "DataParserMatrix.h"
 #include "Utils.h"
 #include "menu.h"
 #include <iostream>
 #include <set>
 
 int main(){
-    Menu menu;
-    menu.openMenu();
+    //Menu menu;
+    //menu.openMenu();
+    /*Graph<int> g;
+    ToyGraphParser("shipping.csv", g);
+    triangularApproximation(g);*/
+
+       Menu menu;
+        menu.openMenu();
+
     /*MGraph g;
 
     Parser("tourism.csv", g);
