@@ -32,7 +32,8 @@ void Menu::chooseGraph(){
     string option;
     cout << "Graph: "; cin >> option; cout << endl;
 
-    Parser(option, g);
+    Parser(option, g1, true);
+    Parser(option, g2, true);
     initialOptions();
 }
 
@@ -53,7 +54,7 @@ void Menu::initialOptions() {
         int initial =0;
         std::vector<int> tsp;
         std::vector<int> final;
-        int numVertex=g.getNumVertex();
+        int numVertex=g1.getNumVertex();
         tsp.push_back(initial);
         int dist=0;
         int minDist=INT_MAX;
@@ -61,9 +62,9 @@ void Menu::initialOptions() {
 
         std::set<int>visited;
 
-        if(BacktrakingTSP(g, dist, minDist, tsp, final, numVertex, initial, found, visited)){
+        if(BacktrakingTSP(g1, dist, minDist, tsp, final, numVertex, initial, found, visited)){
             int totalMinDist=0;
-            std::vector<std::vector<double>>* matrix = g.getDistMatrix();
+            std::vector<std::vector<double>>* matrix = g1.getDistMatrix();
             for(int i=0; i<final.size()-1; i++){
                 totalMinDist+=(*matrix)[final[i]][final[i+1]];
                 cout<<final[i]<<endl;
@@ -79,7 +80,7 @@ void Menu::initialOptions() {
         wait();
     }
     if (option == "2") {
-        for(auto v : (*g.getDistMatrix())){
+        for(auto v : (*g1.getDistMatrix())){
       for(auto d : v){
           cout << d <<" ";
       }cout << endl;
@@ -87,10 +88,10 @@ void Menu::initialOptions() {
         wait();
     }
     if (option == "3") {
-        std::vector<std::vector<double>>* matrix = g.getDistMatrix();
+        std::vector<std::vector<double>>* matrix = g1.getDistMatrix();
         std::vector<int> tsp;
         tsp.push_back(0);
-        nearestNeighbour(g, tsp, matrix);
+        nearestNeighbour(g1, tsp, matrix);
 
         cout<<endl;
         wait();

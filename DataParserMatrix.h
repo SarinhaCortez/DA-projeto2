@@ -18,5 +18,7 @@ using namespace std;
 void MToyGraphParser(const string& filename, MGraph &g);
 void MExtraMSGraphParser(const string& edge_filename, MGraph &g);
 void MRealWorldGraphParser(const string& dir_name, MGraph &g);
-void Parser(const string& path, MGraph &g); //a wrap
+void MExtraMSGraphParserHaversine(const string& edge_filename, MGraph &g);
+void MRealWorldGraphParserHaversine(const string& dir_name, MGraph &g);
+void Parser(const string& path, MGraph &g, bool haversine); //a wrap
 #endif //DA_PROJETO2_DATAPARSERMATRIX_H
