@@ -8,6 +8,13 @@
 int main(){
     Menu menu;
     menu.openMenu();
+/*
+    for(auto v : (*g.getDistMatrix())){
+       for(auto d : v){
+           cout << d <<" ";
+       }cout << endl;
+    }*/
+
     /*MGraph g;
 
     Parser("tourism.csv", g);

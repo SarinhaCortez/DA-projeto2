@@ -1,5 +1,8 @@
 #include <iomanip>
+#include <climits>
 #include "menu.h"
+#include "TSPSolver.h"
+
 
 void Menu::openMenu() {
     cout << setw(25) << "Welcome!" << endl;
@@ -39,7 +42,7 @@ void Menu::chooseGraph(){
 
 void Menu::initialOptions() {
     cout << "What do you want to consult?" << endl;
-    cout << "1. T2.1\n" << "2. T2.2\n" << "3. T2.3\n"<<"4. 2.4\n"<<"5. Quit\n";
+    cout << "1. T2.1\n" << "2. T2.2\n" << "3. T2.3\n"<<"4. T2.4\n"<<"5. Quit\n";
     cout << "Option: ";
     string option;
     cin >> option;
@@ -57,7 +60,7 @@ void Menu::initialOptions() {
         int numVertex=g1.getNumVertex();
         tsp.push_back(initial);
         int dist=0;
-        int minDist=INT_MAX;
+        int minDist  = INT_MAX;
         bool found=false;
 
         std::set<int>visited;
@@ -98,7 +101,16 @@ void Menu::initialOptions() {
     }
 
     if (option == "4") {
-        cout<<"A ser tratado"<<endl;
+        cout << "Loading your answer as fast as a blast..." <<endl;
+        TSPSolver T(g, 10000, 0.99, 10000);
+        cout << "Here's the Traveling Sales-Woman Journey!";
+        double bestCost;
+        std::vector<int> res = T.solve(bestCost);
+        for(auto el:res){
+            cout  << el<<", ";
+        }
+        cout << endl;
+        cout << "And here's how long she traveled: " << bestCost;
         wait();
     }
 
