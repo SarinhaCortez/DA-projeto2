@@ -2,13 +2,14 @@
 #define DA_PROJETO2_UTILS_H
 
 #include "data_structures/MatrixGraph.h"
+#include "data_structures/Graph.h"
 #include <vector>
 #include <set>
 #include <iostream>
 using namespace std;
 
 bool BacktrakingTSP(MGraph &g, int &dist, int &minDist, std::vector<int> &tsp, std::vector<int> &final, int &numVertex, int vertex, bool&found, std::set<int> &visited);
-
+void triangularApproximation(Graph<int> &g);
 bool notPresent(int i, std::vector<int> &tsp);
 pair<int, int> minDist(std::vector<double> currentRow, std::vector<int> &tsp);
 bool nearestNeighbour(MGraph &g,  std::vector<int> &tsp, std::vector<std::vector<double>>* matrix);

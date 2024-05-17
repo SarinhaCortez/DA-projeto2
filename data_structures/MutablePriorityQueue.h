@@ -27,6 +27,8 @@ public:
 	T * extractMin();
 	void decreaseKey(T * x);
 	bool empty();
+    unsigned size();
+
 };
 
 // Index calculations
@@ -97,6 +99,11 @@ template <class T>
 void MutablePriorityQueue<T>::set(unsigned i, T * x) {
 	H[i] = x;
 	x->queueIndex = i;
+}
+
+template <class T>
+unsigned MutablePriorityQueue<T>::size() {
+    return H.size() - 1;
 }
 
 #endif /* DA_TP_CLASSES_MUTABLEPRIORITYQUEUE */

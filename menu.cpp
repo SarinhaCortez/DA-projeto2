@@ -35,9 +35,16 @@ void Menu::chooseGraph(){
     string option;
     cout << "Graph: "; cin >> option; cout << endl;
 
-    Parser(option, g1, true);
-    Parser(option, g2, true);
-    initialOptions();
+    if(option=="0"){
+        initialOptions();
+    }
+    else {
+        Parser(option, g1, true);
+        Parser(option, g2, true);
+
+
+        initialOptions();
+    }
 }
 
 void Menu::initialOptions() {
@@ -83,12 +90,9 @@ void Menu::initialOptions() {
         wait();
     }
     if (option == "2") {
-        for(auto v : (*g1.getDistMatrix())){
-      for(auto d : v){
-          cout << d <<" ";
-      }cout << endl;
-  }
-        wait();
+        Graph<int> g;
+        ToyGraphParser("tourism.csv", g);
+        triangularApproximation(g);
     }
     if (option == "3") {
         std::vector<std::vector<double>>* matrix = g1.getDistMatrix();
