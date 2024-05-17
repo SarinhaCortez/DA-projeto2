@@ -40,7 +40,7 @@ void ToyGraphParser(const string& filename, Graph<int> &g) {
         csv.close();
 }
 
-/*void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
+void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
 
     string line;
 
@@ -89,7 +89,8 @@ void ToyGraphParser(const string& filename, Graph<int> &g) {
         int dest = stoi(dest_str);
         double dist = stod(dist_str);
 
-        g.addEdge(orig, dist, dest);
+        g.addEdge(orig, dest, dist);
+        g.addEdge(dest, orig, dist);
 
     }
 
@@ -149,6 +150,7 @@ void RealWorldGraphParser(const string& dir_name, Graph<int> &g){
         double dist = stod(dist_str);
 
         g.addEdge(orig, dist, dest);
+        g.addEdge(dist, orig, dest);
 
     }
 
@@ -164,4 +166,3 @@ void Parser(const string& path, Graph<int> &g){
     else
         RealWorldGraphParser(path, g);
 }
-*/

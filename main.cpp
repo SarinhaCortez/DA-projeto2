@@ -10,13 +10,11 @@ int main(){
     //Menu menu;
     //menu.openMenu();
     Graph<int> g;
-    ToyGraphParser("shipping.csv", g);
-    /*for(auto x: g.getVertexSet()){
-        for(auto y: x->getAdj()){
-            cout << x->getInfo() << "   " << y->getDest()->getInfo() << endl;
-        }
-    }*/
-    triangularApproximation(g);
+    //ToyGraphParser("tourism.csv", g);
+    //ExtraMSGraphParser("edges_900.csv", g);
+    RealWorldGraphParser("graph1",g);
+    cout << "hello" << endl;
+    //triangularApproximation(g);
 
       /* Menu menu;
         menu.openMenu();*/
