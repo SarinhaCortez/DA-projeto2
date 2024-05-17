@@ -488,11 +488,8 @@ vector<Vertex<int> *> prim(Graph<int> * g) {
 double calculateTourDistance(const vector<Vertex<int>*>& tour) {
     double totalDistance = 0.0;
     Vertex<int>* last;
-    set<int> seen;
+
     for (int x = 0; x < tour.size() - 1; ++x) {
-        auto it = seen.find(tour[x]->getInfo());
-        if (it == seen.end()) {
-            seen.insert(tour[x]->getInfo());
             for (auto &e: tour[x]->getAdj()) {
                 if (e->getDest() == tour[x + 1]) {
                     last = tour[x+1];
@@ -500,7 +497,6 @@ double calculateTourDistance(const vector<Vertex<int>*>& tour) {
                     break;
                 }
             }
-        }
     }
     double tozero;
     for(auto x: last->getAdj()){
@@ -512,20 +508,32 @@ double calculateTourDistance(const vector<Vertex<int>*>& tour) {
     return totalDistance;
 }
 
+vector<Vertex<int>*> removeDup(vector<Vertex<int>*> tour){
+    unordered_set<Vertex<int>*> seen;
+    vector<Vertex<int>*> result;
+    for (const auto& elem : tour) {
+        if (seen.find(elem) == seen.end()) {
+            seen.insert(elem);
+            result.push_back(elem);
+        }
+    }
+    return result;
+}
+
+
 
 void triangularApproximation(Graph<int> &g) {
-
     auto mst = prim(&g);
-    //for(auto x: mst){
-    //    cout <<"coisa " << x->getInfo() << endl;
-    //}
+
     vector<Vertex<int>*> tour;
     for(auto x: mst){
         x->setVisited(false);
     }
     preOrder(mst, mst[0], tour);
 
+    //tour.push_back(g.findVertex(0));
 
+    tour = removeDup(tour);cout << endl;
     double tourDistance = calculateTourDistance(tour);
     cout << "2 -Approximated distance: " << tourDistance << endl;
 

@@ -11,7 +11,7 @@
 #include <random>
 #include <algorithm>
 #include <queue>
-
+#include <unordered_set>
 
 using namespace std;
 
@@ -25,6 +25,7 @@ void printPrim(Graph<int>& g);
 void preOrder(vector<Vertex<int> *> vertexSet, Vertex<int>* v0, vector<Vertex<int>*>& tour);
 double calculateTourDistance(const vector<Vertex<int>*>& tour);
 void triangularApproximation(Graph<int> &g);
+vector<Vertex<int>*> removeDup(vector<Vertex<int>*> tour);
 /*
 double distanceNodes(pair<int, std::pair<double, double>>& point1, pair<int, std::pair<double, double>>& point2);
 void assignClusters(std::vector<pair<int, std::pair<double, double>>>& data,  vector<pair<int, std::pair<double, double>>>& centroids, vector<pair<int, int>>& labels);

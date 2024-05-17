@@ -10,7 +10,7 @@ int main(){
     //Menu menu;
     //menu.openMenu();
     Graph<int> g;
-    ToyGraphParser("tourism.csv", g);
+    ToyGraphParser("shipping.csv", g);
     /*for(auto x: g.getVertexSet()){
         for(auto y: x->getAdj()){
             cout << x->getInfo() << "   " << y->getDest()->getInfo() << endl;
