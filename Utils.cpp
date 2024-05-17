@@ -539,3 +539,55 @@ void triangularApproximation(Graph<int> &g) {
 
 }
 
+double convert_to_radians(double coord){
+    return coord *M_PI/180;
+}
+
+double harversineDistance(Vertex<int>* v1, Vertex<int>* v2){
+
+    double lon1, lat1, lon2, lat2;
+    double earthradius = 6371000; // meters
+
+    lon1 = v1->getLong();
+    lat1 = v1->getLat();
+    lon2=v2->getLong();
+    lat2= v2->getLat();
+
+    double rad_lat1 = convert_to_radians(lat1);
+    double rad_lon1 = convert_to_radians(lon1);
+    double rad_lat2 = convert_to_radians(lat2);
+    double rad_lon2 = convert_to_radians(lon2);
+
+    double delta_lat = rad_lat2 - rad_lat1;
+    double delta_lon = rad_lon2 - rad_lon1;
+
+    double a = sin(delta_lat / 2) * sin(delta_lat / 2) +
+               cos(rad_lat1) * cos(rad_lat2) *
+               sin(delta_lon / 2) * sin(delta_lon / 2);
+    double c = 2.0 * atan2(sqrt(a), std::sqrt(1.0 - a));
+
+    double distance = earthradius * c;
+
+    return distance;
+}
+void RealWorldFullyConnected(Graph <int>& g){
+    bool found;
+    for(auto &v: g.getVertexSet()){
+        found = false;
+        for(auto &v2: g.getVertexSet()){
+            for(auto e: v->getAdj()){
+                if(e->getDest()== v2)
+                    found == true;
+            }
+            if(!found){
+                double dist = harversineDistance(v, v2);
+                g.addEdge(v->getInfo(), v2->getInfo(), dist);
+                g.addEdge(v2->getInfo(), v->getInfo(), dist);
+            }
+        }
+    }
+
+}
+
+
+

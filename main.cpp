@@ -12,9 +12,11 @@ int main(){
     Graph<int> g;
     //ToyGraphParser("tourism.csv", g);
     //ExtraMSGraphParser("edges_900.csv", g);
-    RealWorldGraphParser("graph1",g);
+    RealWorldGraphParser("graph3",g);
     cout << "hello" << endl;
-    //triangularApproximation(g);
+    RealWorldFullyConnected(g);
+    cout << "its me" << endl;
+    triangularApproximation(g);
 
       /* Menu menu;
         menu.openMenu();*/

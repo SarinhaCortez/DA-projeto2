@@ -26,6 +26,8 @@ void preOrder(vector<Vertex<int> *> vertexSet, Vertex<int>* v0, vector<Vertex<in
 double calculateTourDistance(const vector<Vertex<int>*>& tour);
 void triangularApproximation(Graph<int> &g);
 vector<Vertex<int>*> removeDup(vector<Vertex<int>*> tour);
+double harversineDistance(Vertex<int>* v1, Vertex<int>* v2);
+void RealWorldFullyConnected(Graph <int>& g);
 /*
 double distanceNodes(pair<int, std::pair<double, double>>& point1, pair<int, std::pair<double, double>>& point2);
 void assignClusters(std::vector<pair<int, std::pair<double, double>>>& data,  vector<pair<int, std::pair<double, double>>>& centroids, vector<pair<int, int>>& labels);
