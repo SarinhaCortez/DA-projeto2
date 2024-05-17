@@ -9,12 +9,17 @@
 int main(){
     //Menu menu;
     //menu.openMenu();
-    /*Graph<int> g;
-    ToyGraphParser("shipping.csv", g);
-    triangularApproximation(g);*/
+    Graph<int> g;
+    ToyGraphParser("tourism.csv", g);
+    /*for(auto x: g.getVertexSet()){
+        for(auto y: x->getAdj()){
+            cout << x->getInfo() << "   " << y->getDest()->getInfo() << endl;
+        }
+    }*/
+    triangularApproximation(g);
 
-       Menu menu;
-        menu.openMenu();
+      /* Menu menu;
+        menu.openMenu();*/
 
     /*MGraph g;
 

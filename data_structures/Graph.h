@@ -42,16 +42,12 @@ public:
     Edge<T> * addEdge(Vertex<T> *dest, double w);
     bool removeEdge(T in);
     void removeOutgoingEdges();
-    void setLat(double lat);
-    void setLong(double longit);
-    int getLat()const ;
-    int getLong()const ;
-    friend class MutablePriorityQueue<Vertex>;
 
+    friend class MutablePriorityQueue<Vertex>;
 protected:
     T info;                // info node
-    // outgoing edges
-    std::vector<Edge<T> *> adj;
+    std::vector<Edge<T> *> adj;  // outgoing edges
+
     // auxiliary fields
     bool visited = false; // used by DFS, BFS, Prim ...
     bool processing = false; // used by isDAG (in addition to the visited attribute)
@@ -64,8 +60,6 @@ protected:
     int queueIndex = 0; 		// required by MutablePriorityQueue and UFDS
 
     void deleteEdge(Edge<T> *edge);
-
-    double latitude = 0.0, longitude = 0.0; //for not toy graphs
 };
 
 /********************** Edge  ****************************/
@@ -81,6 +75,7 @@ public:
     Vertex<T> * getOrig() const;
     Edge<T> *getReverse() const;
     double getFlow() const;
+
     void setSelected(bool selected);
     void setReverse(Edge<T> *reverse);
     void setFlow(double flow);
@@ -114,7 +109,6 @@ public:
      */
     bool addVertex(const T &in);
     bool removeVertex(const T &in);
-    Edge<T> * findEdge(const T &s, const T &d) const;
 
     /*
      * Adds an edge to a graph (this), given the contents of the source and
@@ -213,23 +207,6 @@ bool Vertex<T>::operator<(Vertex<T> & vertex) const {
 template <class T>
 T Vertex<T>::getInfo() const {
     return this->info;
-}
-
-template <class T>
-void Vertex<T>::setLat(double lat){
-    this->latitude = lat;
-}
-template <class T>
-void Vertex<T>::setLong(double longit){
-    this->longitude = longit;
-}
-template <class T>
-int Vertex<T>::getLat() const {
-    return latitude;
-}
-template <class T>
-int Vertex<T>::getLong() const {
-    return longitude;
 }
 
 template <class T>
@@ -386,14 +363,6 @@ Vertex<T> * Graph<T>::findVertex(const T &in) const {
     return nullptr;
 }
 
-template <class T>
-Edge<T>* Graph<T>::findEdge(const T &s, const T &d) const {
-    Vertex<T> * v = findVertex(s);
-    for(auto e : v->getAdj())
-        if (e->getDest()->getInfo() == s)
-            return e;
-    return nullptr;
-}
 /*
  * Finds the index of the vertex with a given content.
  */

@@ -100,4 +100,3 @@ void MutablePriorityQueue<T>::set(unsigned i, T * x) {
 }
 
 #endif /* DA_TP_CLASSES_MUTABLEPRIORITYQUEUE */
-

@@ -426,7 +426,7 @@ void preOrder(vector<Vertex<int> *> vertexSet, Vertex<int>* v0, vector<Vertex<in
     tour.push_back(v0);
     for(auto e: v0->getAdj()){
         auto v2 = e->getDest();
-        if (!v2->isVisited()){
+        if (!v2->isVisited() and v2->getPath() == e){
             preOrder(vertexSet, v2, tour);
             tour.push_back(v2);
         }
@@ -436,39 +436,44 @@ void preOrder(vector<Vertex<int> *> vertexSet, Vertex<int>* v0, vector<Vertex<in
 
 
 
-vector<Vertex<int> *> prim(Graph<int>& g) {
+
+vector<Vertex<int> *> prim(Graph<int> * g) {
 // Check if the graph is empty
-    if (g.getVertexSet().empty()) {
-        return g.getVertexSet();
+    if (g->getVertexSet().empty()) {
+        return g->getVertexSet(); // Return an empty set if the graph is empty
     }
-
-    for(auto v : g.getVertexSet()) {
-        v->setDist(INF);
-        v->setPath(nullptr);
-        v->setVisited(false);
+// Initialize the vertices in the graph
+    for(auto v : g->getVertexSet()) {
+        v->setDist(INF); // Set distance to infinity
+        v->setPath(nullptr); // Set path to null
+        v->setVisited(false); // Mark as not visited
     }
-
-    Vertex<int>* s = g.findVertex(0);
-    s->setDist(0);
-
+// Select the first vertex as the starting point
+    Vertex<int>* s = g->getVertexSet().front();
+    s->setDist(0); // Set distance of the starting vertex to 0
+// Priority queue to store vertices based on their distances
     MutablePriorityQueue<Vertex<int>> q;
     q.insert(s);
-
+// Main loop for the Prim's algorithm
     while( ! q.empty() ) {
-
+// Extract the vertex with the minimum distance from the priority queue
         auto v = q.extractMin();
-        v->setVisited(true);
-
+        v->setVisited(true); // Mark the vertex as visited
+// Iterate through the adjacent edges of the current vertex
         for(auto &e : v->getAdj()) {
-            Vertex<int>* w = e->getDest();
+            Vertex<int>* w = e->getDest(); // Get the destination vertex of the edge
+// Check if the destination vertex is not visited
             if (!w->isVisited()) {
-                auto oldDist = w->getDist();
+                auto oldDist = w->getDist(); // Get the current distance of the destination vertex
+// Check if the weight of the edge is less than the current distance of the destination vertex
                 if(e->getWeight() < oldDist) {
-                    w->setDist(e->getWeight());
-                    w->setPath(e);
+                    w->setDist(e->getWeight()); // Update the distance of the destination vertex
+                    w->setPath(e); // Update the path to the current edge
+// If the destination vertex had infinite distance, insert it into the priority queue
                     if (oldDist == INF) {
                         q.insert(w);
                     }
+// If the destination vertex had finite distance, decrease its key in the priority queue
                     else {
                         q.decreaseKey(w);
                     }
@@ -476,34 +481,50 @@ vector<Vertex<int> *> prim(Graph<int>& g) {
             }
         }
     }
-    return g.getVertexSet();
+// Return the set of vertices after the Prim's algorithm completes
+    return g->getVertexSet();
 }
 
 double calculateTourDistance(const vector<Vertex<int>*>& tour) {
     double totalDistance = 0.0;
-
+    Vertex<int>* last;
+    set<int> seen;
     for (int x = 0; x < tour.size() - 1; ++x) {
-
-        for (auto& e : tour[x]->getAdj()) {
-            if (e->getDest() == tour[x + 1]) {
-                totalDistance += e->getWeight();
-                break;
+        auto it = seen.find(tour[x]->getInfo());
+        if (it == seen.end()) {
+            seen.insert(tour[x]->getInfo());
+            for (auto &e: tour[x]->getAdj()) {
+                if (e->getDest() == tour[x + 1]) {
+                    last = tour[x+1];
+                    totalDistance += e->getWeight();
+                    break;
+                }
             }
         }
     }
-    totalDistance += tour.back()->getAdj()[0]->getWeight();
+    double tozero;
+    for(auto x: last->getAdj()){
+        if(x->getDest()->getInfo() == 0){
+            tozero = x->getWeight();
+        }
+    }
+    totalDistance += tozero;
     return totalDistance;
 }
 
 
 void triangularApproximation(Graph<int> &g) {
 
-    auto mst = prim(g);
+    auto mst = prim(&g);
+    //for(auto x: mst){
+    //    cout <<"coisa " << x->getInfo() << endl;
+    //}
     vector<Vertex<int>*> tour;
     for(auto x: mst){
         x->setVisited(false);
     }
     preOrder(mst, mst[0], tour);
+
 
     double tourDistance = calculateTourDistance(tour);
     cout << "2 -Approximated distance: " << tourDistance << endl;
