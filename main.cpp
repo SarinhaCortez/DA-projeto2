@@ -1,5 +1,6 @@
-#include "DataParser.h"
-#include "Graph.h"
+//#include "DataParser.h"
+#include "WorldGraph.h"
+#include "RealWorldParse.h"
 //#include "DataParserMatrix.h"
 #include "Utils.h"
 #include "menu.h"
@@ -9,14 +10,24 @@
 int main(){
     //Menu menu;
     //menu.openMenu();
-    Graph<int> g;
-    //ToyGraphParser("tourism.csv", g);
-    //ExtraMSGraphParser("edges_900.csv", g);
-    RealWorldGraphParser("graph3",g);
+    Graph g;
+    //vector<int> n = ToyGraphParser("tourism.csv", g);
+    /*cout << n[0] << "   " << n[1] << endl;
+    if(((n[1]*(n[1]-1))/2)== n[0]){
+        triangularApproximation(g);
+    }
+     else{
+        cout << "noy fully connected" << endl;
+    }*/
+    //ExtraMSGraphParser("edges_25.csv", g);
+    RealWorldGraphParser("graph1",g);
     cout << "hello" << endl;
     RealWorldFullyConnected(g);
-    cout << "its me" << endl;
+    //cout << "its me" << endl;
     triangularApproximation(g);
+
+
+
 
       /* Menu menu;
         menu.openMenu();*/

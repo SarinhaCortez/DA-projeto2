@@ -421,7 +421,7 @@ std::pair<int, int> findClosestNodes(const std::vector<Point>& cluster1, const s
 
 
 
-void preOrder(vector<Vertex<int> *> vertexSet, Vertex<int>* v0, vector<Vertex<int>*>& tour){
+void preOrder(unordered_map<int, Vertex *> vertexSet, Vertex* v0, vector<Vertex *>& tour){
     v0->setVisited(true);
     tour.push_back(v0);
     for(auto e: v0->getAdj()){
@@ -437,43 +437,35 @@ void preOrder(vector<Vertex<int> *> vertexSet, Vertex<int>* v0, vector<Vertex<in
 
 
 
-vector<Vertex<int> *> prim(Graph<int> * g) {
-// Check if the graph is empty
+unordered_map<int, Vertex *> prim(Graph * g) {
     if (g->getVertexSet().empty()) {
-        return g->getVertexSet(); // Return an empty set if the graph is empty
+        return g->getVertexSet();
     }
-// Initialize the vertices in the graph
+
     for(auto v : g->getVertexSet()) {
-        v->setDist(INF); // Set distance to infinity
-        v->setPath(nullptr); // Set path to null
-        v->setVisited(false); // Mark as not visited
+        v.second->setDist(INF);
+        v.second->setPath(nullptr);
+        v.second->setVisited(false);
     }
-// Select the first vertex as the starting point
-    Vertex<int>* s = g->getVertexSet().front();
-    s->setDist(0); // Set distance of the starting vertex to 0
-// Priority queue to store vertices based on their distances
-    MutablePriorityQueue<Vertex<int>> q;
+
+    Vertex* s = g->getVertexSet().find(0)->second;
+    s->setDist(0);
+    MutablePriorityQueue<Vertex> q;
     q.insert(s);
-// Main loop for the Prim's algorithm
+
     while( ! q.empty() ) {
-// Extract the vertex with the minimum distance from the priority queue
         auto v = q.extractMin();
-        v->setVisited(true); // Mark the vertex as visited
-// Iterate through the adjacent edges of the current vertex
+        v->setVisited(true);
         for(auto &e : v->getAdj()) {
-            Vertex<int>* w = e->getDest(); // Get the destination vertex of the edge
-// Check if the destination vertex is not visited
+            Vertex* w = e->getDest();
             if (!w->isVisited()) {
-                auto oldDist = w->getDist(); // Get the current distance of the destination vertex
-// Check if the weight of the edge is less than the current distance of the destination vertex
+                auto oldDist = w->getDist();
                 if(e->getWeight() < oldDist) {
-                    w->setDist(e->getWeight()); // Update the distance of the destination vertex
-                    w->setPath(e); // Update the path to the current edge
-// If the destination vertex had infinite distance, insert it into the priority queue
+                    w->setDist(e->getWeight());
+                    w->setPath(e);
                     if (oldDist == INF) {
                         q.insert(w);
                     }
-// If the destination vertex had finite distance, decrease its key in the priority queue
                     else {
                         q.decreaseKey(w);
                     }
@@ -481,13 +473,13 @@ vector<Vertex<int> *> prim(Graph<int> * g) {
             }
         }
     }
-// Return the set of vertices after the Prim's algorithm completes
+
     return g->getVertexSet();
 }
 
-double calculateTourDistance(const vector<Vertex<int>*>& tour) {
+double calculateTourDistance(const vector<Vertex*>& tour) {
     double totalDistance = 0.0;
-    Vertex<int>* last;
+    Vertex* last;
 
     for (int x = 0; x < tour.size() - 1; ++x) {
             for (auto &e: tour[x]->getAdj()) {
@@ -508,9 +500,9 @@ double calculateTourDistance(const vector<Vertex<int>*>& tour) {
     return totalDistance;
 }
 
-vector<Vertex<int>*> removeDup(vector<Vertex<int>*> tour){
-    unordered_set<Vertex<int>*> seen;
-    vector<Vertex<int>*> result;
+vector<Vertex*> removeDup(vector<Vertex*> tour){
+    unordered_set<Vertex *> seen;
+    vector<Vertex *> result;
     for (const auto& elem : tour) {
         if (seen.find(elem) == seen.end()) {
             seen.insert(elem);
@@ -522,12 +514,12 @@ vector<Vertex<int>*> removeDup(vector<Vertex<int>*> tour){
 
 
 
-void triangularApproximation(Graph<int> &g) {
+void triangularApproximation(Graph  &g) {
     auto mst = prim(&g);
 
-    vector<Vertex<int>*> tour;
+    vector<Vertex *> tour;
     for(auto x: mst){
-        x->setVisited(false);
+        x.second->setVisited(false);
     }
     preOrder(mst, mst[0], tour);
 
@@ -543,7 +535,7 @@ double convert_to_radians(double coord){
     return coord *M_PI/180;
 }
 
-double harversineDistance(Vertex<int>* v1, Vertex<int>* v2){
+double harversineDistance(Vertex * v1, Vertex * v2){
 
     double lon1, lat1, lon2, lat2;
     double earthradius = 6371000; // meters
@@ -570,19 +562,19 @@ double harversineDistance(Vertex<int>* v1, Vertex<int>* v2){
 
     return distance;
 }
-void RealWorldFullyConnected(Graph <int>& g){
+void RealWorldFullyConnected(Graph & g){
     bool found;
     for(auto &v: g.getVertexSet()){
         found = false;
         for(auto &v2: g.getVertexSet()){
-            for(auto e: v->getAdj()){
-                if(e->getDest()== v2)
+            for(auto e: v.second->getAdj()){
+                if(e->getDest() == v2.second)
                     found == true;
             }
             if(!found){
-                double dist = harversineDistance(v, v2);
-                g.addEdge(v->getInfo(), v2->getInfo(), dist);
-                g.addEdge(v2->getInfo(), v->getInfo(), dist);
+                double dist = harversineDistance(v.second, v2.second);
+                g.addEdge(v.second->getInfo(), v2.second->getInfo(), dist);
+                g.addEdge(v2.second->getInfo(), v.second->getInfo(), dist);
             }
         }
     }

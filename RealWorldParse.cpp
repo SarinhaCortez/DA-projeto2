@@ -1,10 +1,9 @@
-//
-// Created by saracortez on 25/04/24.
-//
+#include "RealWorldParse.h"
 
-#include "DataParser.h"
-/*
-void ToyGraphParser(const string& filename, Graph<int> &g) {
+
+vector<int> ToyGraphParser(const string& filename, Graph &g) {
+    int nEdges = 0, nVertx = 0;
+    vector<int> nms;
     ifstream csv("../dataset/Toy-Graphs/Toy-Graphs/" + filename);
 
     if (!csv.is_open()) {
@@ -14,33 +13,39 @@ void ToyGraphParser(const string& filename, Graph<int> &g) {
     string line;
     getline(csv, line);
 
-        while (getline(csv, line)) {
-            istringstream ss(line);
-            string origin_str, destination_str, distance_str;
+    while (getline(csv, line)) {
+        istringstream ss(line);
+        string origin_str, destination_str, distance_str;
 
-            getline(ss, origin_str, ',');
-            getline(ss, destination_str, ',');
-            getline(ss, distance_str, ',');
+        getline(ss, origin_str, ',');
+        getline(ss, destination_str, ',');
+        getline(ss, distance_str, ',');
 
-            int origin = stoi(origin_str);
-            int destination = stoi(destination_str);
-            double distance = stod(distance_str);
+        int origin = stoi(origin_str);
+        int destination = stoi(destination_str);
+        double distance = stod(distance_str);
 
-            if (seenVertices.insert(origin).second) {
-                g.addVertex(origin);
-            }
-            if (seenVertices.insert(destination).second) {
-                g.addVertex(destination);
-            }
-
-            g.addEdge(origin, destination, distance);
-            g.addEdge(destination, origin, distance);
+        if (seenVertices.insert(origin).second) {
+            g.addVertex(origin);
+            nVertx++;
+        }
+        if (seenVertices.insert(destination).second) {
+            g.addVertex(destination);
+            nVertx++;
         }
 
-        csv.close();
+        g.addEdge(origin, destination, distance);
+        g.addEdge(destination, origin, distance);
+        nEdges += 2;
+    }
+
+    csv.close();
+    nms.push_back(nEdges);
+    nms.push_back(nVertx);
+    return nms;
 }
 
-void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
+void ExtraMSGraphParser(const string& edge_filename, Graph &g){
 
     string line;
 
@@ -65,8 +70,12 @@ void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
         double lat = stod(lat_str);
 
         g.addVertex(id);
-        (*(g.getVertexSet().end()-1))->setLong(lon);
-        (*(g.getVertexSet().end()-1))->setLat(lat);
+        auto it = g.getVertexSet().find(id);
+        auto v = it->second;
+        v->setLong(lon);
+        v->setLat(lat);
+        //(*(g.getVertexSet().end()-1))->setLong(lon);
+        //(*(g.getVertexSet().end()-1))->setLat(lat);
     }
     nodes.close();
 
@@ -98,7 +107,8 @@ void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
 
 }
 
-void RealWorldGraphParser(const string& dir_name, Graph<int> &g){
+
+void RealWorldGraphParser(const string& dir_name, Graph &g){
 
     string line;
     ifstream nodes("../dataset/Real-World-Graphs/Real-World-Graphs/"+ dir_name + "/nodes.csv");
@@ -122,8 +132,12 @@ void RealWorldGraphParser(const string& dir_name, Graph<int> &g){
         double lat = stod(lat_str);
 
         g.addVertex(id);
-        (*(g.getVertexSet().end()-1))->setLong(lon);
-        (*(g.getVertexSet().end()-1))->setLat(lat);
+        auto it = g.getVertexSet().find(id);
+        auto v = it->second;
+        v->setLong(lon);
+        v->setLat(lat);
+        //(*(g.getVertexSet().end()-1))->setLong(lon);
+        //(*(g.getVertexSet().end()-1))->setLat(lat);
     }
 
     nodes.close();
@@ -149,20 +163,10 @@ void RealWorldGraphParser(const string& dir_name, Graph<int> &g){
         int dest = stoi(dest_str);
         double dist = stod(dist_str);
 
-        g.addEdge(orig, dest, dist);
-        g.addEdge(dist, orig, dist);
+        g.addEdge(orig, dist, dest);
+        g.addEdge(dist, orig, dest);
 
     }
 
     edges.close();
-}*/
-
-/*void Parser(const string& path, Graph<int> &g){
-    int s = path.size();
-    if(path[0] == 'e')
-        ExtraMSGraphParser(path, g);
-    else if(path[s-1] == 'v')
-        ToyGraphParser(path, g);
-    else
-        RealWorldGraphParser(path, g);
-}*/
+}

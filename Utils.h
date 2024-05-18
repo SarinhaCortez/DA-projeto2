@@ -2,7 +2,7 @@
 #define DA_PROJETO2_UTILS_H
 
 #include "data_structures/MatrixGraph.h"
-#include "data_structures/Graph.h"
+#include "data_structures/WorldGraph.h"
 
 #include <vector>
 #include <set>
@@ -20,14 +20,14 @@ bool BacktrakingTSP(MGraph &g, int &dist, int &minDist, std::vector<int> &tsp, s
 bool notPresent(int i, std::vector<int> &tsp);
 pair<int, int> minDist(std::vector<double> currentRow, std::vector<int> &tsp);
 bool nearestNeighbour(MGraph &g,  std::vector<int> &tsp, std::vector<std::vector<double>>* matrix);
-vector<Vertex<int> *> prim(Graph<int>& g);
-void printPrim(Graph<int>& g);
-void preOrder(vector<Vertex<int> *> vertexSet, Vertex<int>* v0, vector<Vertex<int>*>& tour);
-double calculateTourDistance(const vector<Vertex<int>*>& tour);
-void triangularApproximation(Graph<int> &g);
-vector<Vertex<int>*> removeDup(vector<Vertex<int>*> tour);
-double harversineDistance(Vertex<int>* v1, Vertex<int>* v2);
-void RealWorldFullyConnected(Graph <int>& g);
+vector<Vertex *> prim(Graph& g);
+void printPrim(Graph & g);
+void preOrder(vector<Vertex *> vertexSet, Vertex* v0, vector<Vertex*>& tour);
+double calculateTourDistance(const vector<Vertex *>& tour);
+void triangularApproximation(Graph &g);
+vector<Vertex *> removeDup(vector<Vertex*> tour);
+double harversineDistance(Vertex * v1, Vertex * v2);
+void RealWorldFullyConnected(Graph & g);
 /*
 double distanceNodes(pair<int, std::pair<double, double>>& point1, pair<int, std::pair<double, double>>& point2);
 void assignClusters(std::vector<pair<int, std::pair<double, double>>>& data,  vector<pair<int, std::pair<double, double>>>& centroids, vector<pair<int, int>>& labels);

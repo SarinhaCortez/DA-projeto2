@@ -19,4 +19,8 @@ add_executable(DA_projeto2
         DataParserMatrix.cpp
         DataParserMatrix.h
         menu.h
-        menu.cpp)
+        menu.cpp
+        data_structures/WorldGraph.h
+        RealWorldParse.cpp
+        RealWorldParse.h
+        data_structures/WorldGraph.cpp)
