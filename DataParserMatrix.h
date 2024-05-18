@@ -16,6 +16,8 @@ using namespace std;
  * based on this informations, Parser knows which funct to call
  */
 void MToyGraphParser(const string& filename, MGraph &g);
+double convert_radians(double coord);
+int harversineDistance(int node1, int node2, MGraph &g);
 void MExtraMSGraphParser(const string& edge_filename, MGraph &g);
 void MRealWorldGraphParser(const string& dir_name, MGraph &g);
 void MExtraMSGraphParserHaversine(const string& edge_filename, MGraph &g);

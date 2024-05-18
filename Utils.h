@@ -9,12 +9,17 @@
 using namespace std;
 
 bool BacktrakingTSP(MGraph &g, int &dist, int &minDist, std::vector<int> &tsp, std::vector<int> &final, int &numVertex, int vertex, bool&found, std::set<int> &visited);
-void triangularApproximation(Graph<int> &g);
 bool notPresent(int i, std::vector<int> &tsp);
 pair<int, int> minDist(std::vector<double> currentRow, std::vector<int> &tsp);
 bool nearestNeighbour(MGraph &g,  std::vector<int> &tsp, std::vector<std::vector<double>>* matrix);
 
-
+void printPrim(Graph<int>& g);
+void preOrder(vector<Vertex<int> *> vertexSet, Vertex<int>* v0, vector<Vertex<int>*>& tour);
+double calculateTourDistance(const vector<Vertex<int>*>& tour);
+void triangularApproximation(Graph<int> &g);
+vector<Vertex<int>*> removeDup(vector<Vertex<int>*> tour);
+double harversineDistance(Vertex<int>* v1, Vertex<int>* v2);
+void RealWorldFullyConnected(Graph <int>& g);
 /*
 double distanceNodes(pair<int, std::pair<double, double>>& point1, pair<int, std::pair<double, double>>& point2);
 void assignClusters(std::vector<pair<int, std::pair<double, double>>>& data,  vector<pair<int, std::pair<double, double>>>& centroids, vector<pair<int, int>>& labels);

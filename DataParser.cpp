@@ -14,30 +14,30 @@ void ToyGraphParser(const string& filename, Graph<int> &g) {
     string line;
     getline(csv, line);
 
-        while (getline(csv, line)) {
-            istringstream ss(line);
-            string origin_str, destination_str, distance_str;
+    while (getline(csv, line)) {
+        istringstream ss(line);
+        string origin_str, destination_str, distance_str;
 
-            getline(ss, origin_str, ',');
-            getline(ss, destination_str, ',');
-            getline(ss, distance_str, ',');
+        getline(ss, origin_str, ',');
+        getline(ss, destination_str, ',');
+        getline(ss, distance_str, ',');
 
-            int origin = stoi(origin_str);
-            int destination = stoi(destination_str);
-            double distance = stod(distance_str);
+        int origin = stoi(origin_str);
+        int destination = stoi(destination_str);
+        double distance = stod(distance_str);
 
-            if (seenVertices.insert(origin).second) {
-                g.addVertex(origin);
-            }
-            if (seenVertices.insert(destination).second) {
-                g.addVertex(destination);
-            }
-
-            g.addEdge(origin, destination, distance);
-            g.addEdge(destination, origin, distance);
+        if (seenVertices.insert(origin).second) {
+            g.addVertex(origin);
+        }
+        if (seenVertices.insert(destination).second) {
+            g.addVertex(destination);
         }
 
-        csv.close();
+        g.addEdge(origin, destination, distance);
+        g.addEdge(destination, origin, distance);
+    }
+
+    csv.close();
 }
 
 void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
@@ -89,7 +89,8 @@ void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
         int dest = stoi(dest_str);
         double dist = stod(dist_str);
 
-        g.addEdge(orig, dist, dest);
+        g.addEdge(orig, dest, dist);
+        g.addEdge(dest, orig, dist);
 
     }
 
@@ -149,6 +150,7 @@ void RealWorldGraphParser(const string& dir_name, Graph<int> &g){
         double dist = stod(dist_str);
 
         g.addEdge(orig, dist, dest);
+        g.addEdge(dist, orig, dest);
 
     }
 

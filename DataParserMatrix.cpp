@@ -51,7 +51,7 @@ void MToyGraphParser(const string& filename, MGraph &g) {
 }
 const double pi = 3.14159265358979323846;
 const double earthRadius = 6371000;
-double convert_to_radians(double coord){
+double convert_radians(double coord){
 return coord*pi/180.;}
 
 int harversineDistance(int node1, int node2, MGraph &g){
@@ -69,10 +69,10 @@ int harversineDistance(int node1, int node2, MGraph &g){
         lat2 = node2.second;
     }
 
-    double rad_lat1 = convert_to_radians(lat1);
-    double rad_lon1 = convert_to_radians(lon1);
-    double rad_lat2 = convert_to_radians(lat2);
-    double rad_lon2 = convert_to_radians(lon2);
+    double rad_lat1 = convert_radians(lat1);
+    double rad_lon1 = convert_radians(lon1);
+    double rad_lat2 = convert_radians(lat2);
+    double rad_lon2 = convert_radians(lon2);
 
 
     double delta_lat = rad_lat2 - rad_lat1;
