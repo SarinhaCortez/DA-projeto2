@@ -1,7 +1,4 @@
-#include <iomanip>
-#include <climits>
 #include "menu.h"
-#include "TSPSolver.h"
 
 
 void Menu::openMenu() {
@@ -92,7 +89,10 @@ void Menu::initialOptions(string graph) {
         wait(graph);
     }
     if (option == "2") {
-        Parser(graph, g3, true);
+        WParser(graph, g3);
+        if(graph[0] == 'g'){
+            RealWorldFullyConnected(g3);
+        }
         triangularApproximation(g3);
         cout<<endl;
         wait(graph);

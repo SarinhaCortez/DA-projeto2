@@ -7,12 +7,11 @@ include_directories(.)
 include_directories(data_structures)
 
 add_executable(DA_projeto2
-        data_structures/Graph.h
         data_structures/MutablePriorityQueue.h
         data_structures/UFDS.cpp
         data_structures/UFDS.h
-        DataParser.cpp
-        DataParser.h
+        data_structures/WGraph.cpp
+        data_structures/WGraph.h
         main.cpp
         Utils.cpp
         data_structures/MatrixGraph.h
@@ -22,4 +21,6 @@ add_executable(DA_projeto2
         menu.cpp
         haversine.cpp
         haversine.h
-        TSPSolver.h)
+        TSPSolver.h
+        WParser.h
+        WParser.cpp)
