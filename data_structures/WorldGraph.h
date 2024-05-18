@@ -6,6 +6,7 @@
 #include <limits>
 #include <algorithm>
 #include <unordered_map>
+#include <unordered_set>
 #include "../data_structures/MutablePriorityQueue.h"
 
 #define INF std::numeric_limits<double>::max()
@@ -22,7 +23,7 @@ public:
     explicit Vertex(int in);
     bool operator<(const Vertex & vertex) const; // required by MutablePriorityQueue
     int getInfo() const;
-    const std::vector<Edge*>& getAdj() const;
+    const std::unordered_set<Edge*>& getAdj() const;
     bool isVisited() const;
     double getDist() const;
     Edge* getPath() const;
@@ -40,7 +41,7 @@ public:
 
 protected:
     int info;
-    std::vector<Edge*> adj;
+    std::unordered_set<Edge*> adj;
     bool visited = false; // used by DFS, BFS, Prim ...
     double dist = 0;
     Edge *path = nullptr;

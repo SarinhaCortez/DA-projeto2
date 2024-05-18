@@ -20,10 +20,10 @@ int main(){
         cout << "noy fully connected" << endl;
     }*/
     //ExtraMSGraphParser("edges_25.csv", g);
-    RealWorldGraphParser("graph1",g);
+    RealWorldGraphParser("graph2",g);
     cout << "hello" << endl;
     RealWorldFullyConnected(g);
-    //cout << "its me" << endl;
+    cout << "its me" << endl;
     triangularApproximation(g);
 
 

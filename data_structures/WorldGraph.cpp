@@ -5,7 +5,7 @@ Vertex::Vertex(int in) : info(in) {}
 
 Edge* Vertex::addEdgeV(Vertex *d, double w) {
     auto newEdge = new Edge(this, d, w);
-    adj.push_back(newEdge);
+    adj.insert(newEdge);
     return newEdge;
 }
 
@@ -33,7 +33,7 @@ double Vertex::getLong() const {
     return longitude;
 }
 
-const std::vector<Edge*>& Vertex::getAdj() const {
+const std::unordered_set<Edge*>& Vertex::getAdj() const {
     return this->adj;
 }
 

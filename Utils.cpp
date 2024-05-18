@@ -562,23 +562,39 @@ double harversineDistance(Vertex * v1, Vertex * v2){
 
     return distance;
 }
-void RealWorldFullyConnected(Graph & g){
-    bool found;
-    for(auto &v: g.getVertexSet()){
-        found = false;
-        for(auto &v2: g.getVertexSet()){
-            for(auto e: v.second->getAdj()){
-                if(e->getDest() == v2.second)
-                    found == true;
-            }
-            if(!found){
-                double dist = harversineDistance(v.second, v2.second);
-                g.addEdge(v.second->getInfo(), v2.second->getInfo(), dist);
-                g.addEdge(v2.second->getInfo(), v.second->getInfo(), dist);
-            }
+
+
+void RealWorldFullyConnected(Graph &g) {
+    int nEdges = g.getVertexSet().size() - 1;
+
+    std::unordered_map<Vertex*, std::unordered_set<Vertex*>> adjacencyMap;
+    for (auto &v : g.getVertexSet()) {
+        for (auto e : v.second->getAdj()) {
+            adjacencyMap[v.second].insert(e->getDest());
         }
     }
 
+    for (auto &v1 : g.getVertexSet()) {
+        auto vertex1 = v1.second;
+        if (adjacencyMap[vertex1].size() == nEdges) {
+            continue;
+        }
+
+        for (auto &v2 : g.getVertexSet()) {
+            if (v1 == v2) {
+                continue;
+            }
+            auto vertex2 = v2.second;
+            if (adjacencyMap[vertex1].find(vertex2) == adjacencyMap[vertex1].end()) {
+                double dist = harversineDistance(vertex1, vertex2);
+                g.addEdge(vertex1->getInfo(), vertex2->getInfo(), dist);
+                g.addEdge(vertex2->getInfo(), vertex1->getInfo(), dist);
+
+                adjacencyMap[vertex1].insert(vertex2);
+                adjacencyMap[vertex2].insert(vertex1);
+            }
+        }
+    }
 }
 
 
