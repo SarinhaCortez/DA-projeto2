@@ -12,7 +12,7 @@ void Menu::openMenu() {
 Menu::Menu() {}
 
 
-void Menu::wait() {
+void Menu::wait(string graph) {
     cout << endl << "Press ENTER to continue ..." << endl;
     cin.ignore(); // Clear the input buffer
 
@@ -23,7 +23,7 @@ void Menu::wait() {
         getline(cin, enter); // Get the next line of input
     }
 
-    continueM();
+    continueM(graph);
 }
 int Menu::closeMenu() {
     return 0;
@@ -36,18 +36,18 @@ void Menu::chooseGraph(){
     cout << "Graph: "; cin >> option; cout << endl;
 
     if(option=="0"){
-        initialOptions();
+        initialOptions(option);
     }
     else {
-        Parser(option, g1, true);
-        Parser(option, g2, true);
+        /*Parser(option, g1, true);
+        Parser(option, g2, true);*/
 
 
-        initialOptions();
+        initialOptions(option);
     }
 }
 
-void Menu::initialOptions() {
+void Menu::initialOptions(string graph) {
     cout << "What do you want to consult?" << endl;
     cout << "1. T2.1\n" << "2. T2.2\n" << "3. T2.3\n"<<"4. T2.4\n"<<"5. Quit\n";
     cout << "Option: ";
@@ -61,6 +61,8 @@ void Menu::initialOptions() {
 
     cout << " " << endl;
     if (option == "1") {
+        if(g1.getNumVertex()==0){
+        Parser(graph, g1, true);}
         int initial =0;
         std::vector<int> tsp;
         std::vector<int> final;
@@ -73,7 +75,7 @@ void Menu::initialOptions() {
         std::set<int>visited;
 
         if(BacktrakingTSP(g1, dist, minDist, tsp, final, numVertex, initial, found, visited)){
-            int totalMinDist=0;
+            double totalMinDist=0;
             std::vector<std::vector<double>>* matrix = g1.getDistMatrix();
             for(int i=0; i<final.size()-1; i++){
                 totalMinDist+=(*matrix)[final[i]][final[i+1]];
@@ -87,24 +89,29 @@ void Menu::initialOptions() {
         }
 
         cout<<endl;
-        wait();
+        wait(graph);
     }
     if (option == "2") {
-        Graph<int> g;
-        ToyGraphParser("tourism.csv", g);
-        triangularApproximation(g);
+        Parser(graph, g3, true);
+        triangularApproximation(g3);
+        cout<<endl;
+        wait(graph);
     }
     if (option == "3") {
+        if(g1.getNumVertex()==0){
+            Parser(graph, g1, false);}
         std::vector<std::vector<double>>* matrix = g1.getDistMatrix();
         std::vector<int> tsp;
         tsp.push_back(0);
         nearestNeighbour(g1, tsp, matrix);
 
         cout<<endl;
-        wait();
+        wait(graph);
     }
 
     if (option == "4") {
+        if(g2.getNumVertex()==0){
+            Parser(graph, g2, false);}
         cout << "Loading your answer as fast as a blast..." <<endl;
         TSPSolver T(g2, 10000, 0.99, 10000);
         cout << "Here's the Traveling Sales-Woman Journey!";
@@ -115,13 +122,13 @@ void Menu::initialOptions() {
         }
         cout << endl;
         cout << "And here's how long she traveled: " << bestCost;
-        wait();
+        wait(graph);
     }
 
     if (option == "5") { closeMenu(); }
 }
 
-void Menu::continueM(){
+void Menu::continueM(string graph){
     cout << "Choose one option" << endl;
     cout << "1. Go back to Menu\n" << "2.Quit\n" << endl;
     cout << "Option: ";
@@ -132,6 +139,6 @@ void Menu::continueM(){
         cout << "Invalid input. Option: ";
         cin >> option;
     }
-    if( option == "1"){initialOptions();}
+    if( option == "1"){initialOptions(graph);}
     else{closeMenu();}
 }

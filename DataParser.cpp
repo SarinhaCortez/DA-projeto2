@@ -5,7 +5,7 @@
 #include "DataParser.h"
 
 void ToyGraphParser(const string& filename, Graph<int> &g) {
-    ifstream csv("../dataset/Toy-Graphs/Toy-Graphs/" + filename);
+    ifstream csv("../dataset/Toy-Graphs/Toy-Graphs/" + filename + ".csv");
 
     if (!csv.is_open()) {
         cerr << "Error opening csv file!" << endl;
@@ -70,7 +70,7 @@ void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
     }
     nodes.close();
 
-    ifstream edges("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename);
+    ifstream edges("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename + ".csv");
 
     if (!edges.is_open()) {
         cerr << "Error opening edges file!" << endl;
@@ -155,13 +155,19 @@ void RealWorldGraphParser(const string& dir_name, Graph<int> &g){
     edges.close();
 }
 
-void Parser(const string& path, Graph<int> &g){
-    int s = path.size();
-    if(path[0] == 'e')
-        ExtraMSGraphParser(path, g);
-    else if(path[s-1] == 'v')
-        ToyGraphParser(path, g);
-    else
-        RealWorldGraphParser(path, g);
-}
+void Parser(const string& path, Graph<int> &g, bool haversine){
+    if (path[0] == 's' || path[0]=='t'){
+        ToyGraphParser(path, g);}
+
+    else{
+
+            if (path[0] == 'e')
+                ExtraMSGraphParser(path, g);
+
+            else
+                RealWorldGraphParser(path, g);
+        }
+
+    }
+
 

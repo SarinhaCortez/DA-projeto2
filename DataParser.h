@@ -18,5 +18,5 @@ using namespace std;
 void ToyGraphParser(const string& filename, Graph<int> &g);
 void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g);
 void RealWorldGraphParser(const string& dir_name, Graph<int> &g);
-void Parser(const string& path, Graph<int> &g); //a wrap
+void Parser(const string& path, Graph<int> &g, bool haversine); //a wrap
 #endif //DA_PROJETO2_DATAPARSER_H

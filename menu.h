@@ -12,14 +12,15 @@ class Menu{
 public:
     MGraph g1; //com haversine distance
     MGraph g2; //sem haversine distance
+    Graph<int> g3; //aulas
      Menu();
     void buildGraph(string graph);
     void openMenu();
-    void wait();
-    void initialOptions();
+    void wait(string graph);
+    void initialOptions(string graph);
     int closeMenu();
     void chooseGraph();
-    void continueM();
+    void continueM(string graph);
 };
 
 
