@@ -3,6 +3,7 @@
 
 void Menu::openMenu() {
     cout << setw(25) << "Welcome!" << endl;
+    cout << "Choose which graph you want to analyze: " << endl;
     chooseGraph();
 }
 
@@ -27,11 +28,15 @@ int Menu::closeMenu() {
 }
 
 void Menu::chooseGraph(){
-    cout << "Choose which graph you want to analyze: " << endl;
-
     string option;
     cout << "Graph: "; cin >> option; cout << endl;
-
+    unordered_set<string>files = {"tourism", "shipping", "stadiums", "graph1", "graph2", "graph3", "edges_25", "edges_50", "edges_75","edges_100",
+                                  "edges_200", "edges_300", "edges_400", "edges_500", "edges_600", "edges_700", "edges_800", "edges_900"};
+    auto it = files.find(option);
+    if(it == files.end()){
+        cout << "Invalid option." << endl << endl;
+        chooseGraph();
+    }
     if(option=="0"){
         initialOptions(option);
     }
@@ -89,13 +94,20 @@ void Menu::initialOptions(string graph) {
         wait(graph);
     }
     if (option == "2") {
-        WParser(graph, g3);
-        if(graph[0] == 'g'){
-            RealWorldFullyConnected(g3);
+        if(option == "shipping"){
+            cout << "This Graph is not fully connected. We can´t perform this algorithm." << endl;
         }
-        triangularApproximation(g3);
-        cout<<endl;
-        wait(graph);
+        else{
+            WParser(graph, g3);
+            if(graph[0] == 'g'){
+                RealWorldFullyConnected(g3);
+            }
+            triangularApproximation(g3);
+            cout<<endl;
+            wait(graph);
+        }
+
+
     }
     if (option == "3") {
         if(g1.getNumVertex()==0){
