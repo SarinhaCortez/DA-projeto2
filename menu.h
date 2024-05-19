@@ -11,21 +11,59 @@
 
 
 
-
+/**
+ * @brief Class of the menu system for analyzing graphs.
+ *
+ * The Menu class provides functionality to build and interact with various
+ * types of graphs. It supports operations such as selecting graphs, displaying menu
+ * options, and performing specific algorithms on the graphs.
+ */
 class Menu{
 public:
     MGraph g1; //com haversine distance automática
     MGraph g2; //sem haversine distance automática
-    Graph g3; //aulas
+    Graph g3;
 
+    /**
+    * @brief Constructs a Menu object.
+    */
     Menu();
-    void buildGraph(string graph);
+
     void openMenu();
+    /**
+     * @brief Waits for user input to continue.
+     *
+     * @param graph The name of the graph being analyzed.
+     */
     void wait(string graph);
+
+    /**
+     * @brief Displays the initial options menu.
+     *
+     * Menu where the user can select the algorithm to perform.
+     *
+     * @param graph The name of the graph being analyzed.
+     */
     void initialOptions(string graph);
+
+    /**
+    * @brief Closes the menu.
+    */
     int closeMenu();
+
+    /**
+     * @brief Prompts the user to choose a graph to analyze.
+     */
     void chooseGraph();
+
+    /**
+     * @brief Continues menu interaction after a wait period.
+     *
+     * @param graph The name of the graph being analyzed.
+     */
     void continueM(string graph);
+
+    //void buildGraph(string graph);
 };
 
 

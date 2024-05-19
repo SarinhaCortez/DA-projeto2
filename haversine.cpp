@@ -1,16 +1,4 @@
-//
-// Created by saracortez on 10/05/24.
-//
-/*
- *  Harversine.c
- *  Haversine
- *
- *  Created by Jaime Rios on 2/16/08.
- *
- */
-
 #include "haversine.h"
-#include <math.h>
 
 /**********************************************************************
  Haversine Formula
@@ -33,6 +21,7 @@
  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
  var d = R * c;
  */
+
 auto calculate_distance(const angle_t latitude1,
                         const angle_t longitude1,
                         const angle_t latitude2,
