@@ -24,6 +24,8 @@ using namespace std;
  * @param vertex The current vertex being visited.
  * @param found A boolean flag indicating if the optimal tour has been found.
  * @param visited A set containing the vertices already visited.
+ * @details This function has a time complexity of O(n⋅(n−1)!), where N is the number of nodes
+     *          and (n-1)! is the number of time this function calls itself.
  * @return True if the optimal tour is found, otherwise false.
  */
 bool BacktrakingTSP(MGraph &g, int &dist, int &minDist, std::vector<int> &tsp, std::vector<int> &final, int &numVertex, int vertex, bool&found, std::set<int> &visited);
@@ -36,6 +38,7 @@ bool BacktrakingTSP(MGraph &g, int &dist, int &minDist, std::vector<int> &tsp, s
  *
  * @param i The parameter to check for presence in the vector.
  * @param tsp The vector in which to search.
+ * @details This function has a time complexity of O(n), where N is the number of elements in tsp.
  * @return True if the integer is not present in the vector, otherwise false.
  */
 bool notPresent(int i, std::vector<int> &tsp);
@@ -48,7 +51,8 @@ bool notPresent(int i, std::vector<int> &tsp);
  *
  * @param currentRow The row of distances from a specific vertex to all other vertices.
  * @param tsp The vector representing the visited vertices.
- * @return A pair containing the minimum distance and its corresponding vertex index.
+ * @details This function has a time complexity of O(n⋅m), where n and m are the number of elements in currentRow and tsp, respectively.
+ * * @return A pair containing the minimum distance and its corresponding vertex index.
  */
 pair<int, int> minDist(std::vector<double> currentRow, std::vector<int> &tsp);
 
@@ -62,6 +66,7 @@ pair<int, int> minDist(std::vector<double> currentRow, std::vector<int> &tsp);
  * @param g The graph for which to construct the tour.
  * @param tsp The vector representing the tour.
  * @param matrix A pointer to the matrix representing the distances between vertices.
+ * @details This function has a time complexity of O(n^3), where n is the number of nodes
  * @return True on success, otherwise false.
  */
 bool nearestNeighbour(MGraph &g,  std::vector<int> &tsp, std::vector<std::vector<double>>* matrix);
@@ -74,6 +79,7 @@ bool nearestNeighbour(MGraph &g,  std::vector<int> &tsp, std::vector<std::vector
  * a vertex in the tree to a vertex not yet in the tree.
  *
  * @param g A pointer to the graph for which to find the minimum spanning tree.
+ * @details This function has a time complexity of O((V +E) log V), where V is the number of vertex and E is the number of edges.
  * @return An unordered map containing the vertices of the minimum spanning tree
 */
 vector<Vertex *> prim(Graph& g);
@@ -89,6 +95,7 @@ vector<Vertex *> prim(Graph& g);
  * @param vertexSet An unordered map containing all vertices in the graph.
  * @param v0 The starting vertex for the pre-order traversal.
  * @param tour A vector to store the vertices visited during the pre-order traversal.
+ * @details This function has a time complexity of O(V+E), where V is the number of vertex and E is the number of edges.
  */
 void preOrder(vector<Vertex *> vertexSet, Vertex* v0, vector<Vertex*>& tour);
 
@@ -100,6 +107,7 @@ void preOrder(vector<Vertex *> vertexSet, Vertex* v0, vector<Vertex*>& tour);
  * Additionally, it considers the distance from the last vertex in the tour back to the starting vertex (vertex 0).
  *
  * @param tour A vector containing pointers to the vertices in the tour.
+ * @details This function has a time complexity of O(n⋅d), where N is the number of nodes and td is the maxium number of outcoming edges of a node
  * @return The total distance of the tour.
  */
 double calculateTourDistance(const vector<Vertex *>& tour);
@@ -113,6 +121,7 @@ double calculateTourDistance(const vector<Vertex *>& tour);
  * Finally, it calculates the total distance of the tour and prints the result.
  *
  * @param g The graph for which to find the minimum tour.
+ * @details This function has a time complexity of O(V^2 * logV), where V is the number of nodes.
  */
 void triangularApproximation(Graph &g);
 
@@ -126,6 +135,7 @@ void triangularApproximation(Graph &g);
  * is included exactly once in the result.
  *
  * @param tour A vector containing pointers to vertices representing the tour.
+ * @details This function has a time complexity of O(n), where N is the number of elements of vector tour.
  * @return A vector containing pointers to vertices with duplicates removed.
  */
 vector<Vertex *> removeDup(vector<Vertex*> tour);
@@ -137,6 +147,7 @@ vector<Vertex *> removeDup(vector<Vertex*> tour);
  *
  * @param v1 Pointer to the first vertex.
  * @param v2 Pointer to the second vertex.
+ * @details This function has a time complexity of O(1).
  * @return The Haversine distance between the two vertices in meters.
  */
 double harversineDistance(Vertex * v1, Vertex * v2);
@@ -148,6 +159,7 @@ double harversineDistance(Vertex * v1, Vertex * v2);
  * by adding missing edges based on the Haversine distance between vertices.
  *
  * @param g The graph to be made fully connected.
+ * @details This function has a time complexity of O(n^2), where N is the number of nodes.
  */
 void RealWorldFullyConnected(Graph & g);
 
