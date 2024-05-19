@@ -4,6 +4,7 @@
 void Menu::openMenu() {
     cout << setw(25) << "Welcome!" << endl;
     cout << "Choose which graph you want to analyze: " << endl;
+    parsed3 = false;
     chooseGraph();
 }
 
@@ -94,20 +95,23 @@ void Menu::initialOptions(string graph) {
         wait(graph);
     }
     if (option == "2") {
-        if(option == "shipping"){
-            cout << "This Graph is not fully connected. We can´t perform this algorithm." << endl;
+        if(graph == "shipping"){
+            cout << "This Graph is not fully connected. Not able to perform this algorithm." << endl;
+
         }
         else{
-            WParser(graph, g3);
+            if(!parsed3){
+                WParser(graph, g3);
+                cout << "parsed";
+                parsed3 = true;
+            }
             if(graph[0] == 'g'){
                 RealWorldFullyConnected(g3);
             }
             triangularApproximation(g3);
             cout<<endl;
-            wait(graph);
         }
-
-
+        wait(graph);
     }
     if (option == "3") {
         if(g1.getNumVertex()==0){

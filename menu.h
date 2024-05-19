@@ -23,6 +23,7 @@ public:
     MGraph g1; //com haversine distance automática
     MGraph g2; //sem haversine distance automática
     Graph g3;
+    bool parsed3;
 
     /**
     * @brief Constructs a Menu object.

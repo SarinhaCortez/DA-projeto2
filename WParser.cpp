@@ -175,7 +175,7 @@ void RealWorldGraphParser(const string& dir_name, Graph &g){
 void WParser(const string& path, Graph &g){
     if (path[0] == 's' || path[0]=='t'){
         ToyGraphParser(path, g);}
-    if (path[0] == 'e')
+    else if (path[0] == 'e')
         ExtraMSGraphParser(path, g);
     else{
         RealWorldGraphParser(path, g);
