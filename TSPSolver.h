@@ -61,8 +61,7 @@ class TSPSolver {
                             tempPath.push_back(newPath[k]);
                         }
 
-                        // Ensure there is an edge from the last vertex to the first
-                        if (graph.getWeight(tempPath.back(), tempPath.front()) >= 0) {
+                        if (graph.getWeight(tempPath.back(), tempPath.front() - 1) >= 0) {
                             return tempPath; // Return the new valid path
                         } else {
                             return std::vector<int>(); // Return an empty path if the edge doesn't exist
@@ -81,70 +80,65 @@ class TSPSolver {
 
     double acceptanceProbability(double energy, double newEnergy, double temperature) {
         if (newEnergy < energy) {
-            return 1.0; // Accept the new solution
+            return 1.0;
         }
-        // Calculate acceptance probability based on temperature and energy difference
+
         return exp((energy - newEnergy) / temperature);
     }
-    bool findHamiltonianPathDFS(int currentVertex, std::vector<int>& path, std::unordered_set<int>& visited) {
-        // Add currentVertex to the path and mark it as visited
+    bool findHamiltonianPathDFS(int currentVertex, std::vector<int>& path, std::vector<bool>& visited, int startVertex) {
         path.push_back(currentVertex);
-        visited.insert(currentVertex);
+        visited[currentVertex] = true;
 
-        // Check if all vertices have been visited
         if (path.size() == graph.getNumVertex()) {
-            // Verify if there's an edge from the last vertex to the first to form a Hamiltonian cycle
-            if (graph.getWeight(path.back(), path.front()) >= 0) {
+            // Ensure the path forms a Hamiltonian cycle
+            if (graph.getWeight(currentVertex, startVertex) >= 0) {
+                path.push_back(startVertex);  // Close the cycle
                 return true;
             } else {
-                // If not, remove the last vertex from the path and backtrack
                 path.pop_back();
-                visited.erase(currentVertex);
+                visited[currentVertex] = false;
                 return false;
             }
         }
 
-        // Iterate over adjacent vertices
         for (int nextVertex : graph.getAdj(currentVertex)) {
-            // Explore unvisited adjacent vertices recursively
-            if (visited.find(nextVertex) == visited.end()) {
-                if (findHamiltonianPathDFS(nextVertex, path, visited)) {
-                    return true; // Found a Hamiltonian path
+            if (!visited[nextVertex] && graph.getWeight(currentVertex, nextVertex) >= 0) {
+                if (findHamiltonianPathDFS(nextVertex, path, visited, startVertex)) {
+                    return true;
                 }
             }
         }
 
-        // If no Hamiltonian path is found from the current vertex, backtrack
         path.pop_back();
-        visited.erase(currentVertex);
+        visited[currentVertex] = false;
         return false;
     }
 
-    std::vector<int> findInitialHamiltonianPath() {
+    std::vector<int> findInitialHamiltonianPath(int sV) {
         std::vector<int> path;
-        std::unordered_set<int> visited;
+        std::vector<bool> visited(graph.getNumVertex(), false);
 
-        // Start DFS from each vertex to find a Hamiltonian path
-        for (int startVertex = 0; startVertex < graph.getNumVertex(); ++startVertex) {
-            if (findHamiltonianPathDFS(startVertex, path, visited)) {
-                // If a Hamiltonian path is found, return it
-                return path;
-            }
+        if (findHamiltonianPathDFS(sV, path, visited, sV)) {
+            return path;
         }
+        path.clear();
+        std::fill(visited.begin(), visited.end(), false);
 
-        // If no Hamiltonian path is found, return an empty path
         return std::vector<int>();
     }
-
 
 public:
     TSPSolver(MGraph &graph, double initialTemperature, double coolingRate, int maxIterations)
             : graph(graph), temperature(initialTemperature), coolingRate(coolingRate), maxIterations(maxIterations) {}
 
-    std::vector<int> solve(double &bc) {
-        double averageCostIncrease; int it;
-        std::vector<int> currentTour; // Initialize with a random tour
-        currentTour = findInitialHamiltonianPath();
+    std::vector<int> solve(double &bc, int sV) {
+        double averageCostIncrease = 0.0;
+        int it = 0;
+        std::vector<int> currentTour = findInitialHamiltonianPath(sV);
+
+        if (currentTour.empty()) {
+            return currentTour;
+        }
 
         std::vector<int> bestTour = currentTour;
         double bestCost = calculateCost(currentTour);
@@ -152,6 +146,12 @@ public:
         srand(time(NULL));
         for (int iteration = 0; iteration < maxIterations; ++iteration) {
             std::vector<int> newTour = generateNeighbor(currentTour);
+            /*int n = 10;
+            while((n-- > 0 && newTour.empty()){
+                newTour = generateNeighbor(currentTour);
+                if(n == 1 && newTour.empty()))return currentTour;
+            }*/
+            if(newTour.empty()) newTour = currentTour;
             double currentCost = calculateCost(currentTour);
             double newCost = calculateCost(newTour);
 
@@ -162,16 +162,15 @@ public:
                     bestCost = newCost;
                 }
             }
-            temperature *= coolingRate; // Update temperature according to cooling schedule
+            temperature *= coolingRate;
             averageCostIncrease += (newCost - currentCost);
             it = iteration;
         }
-        cout << "Average Cost Increase = " << averageCostIncrease/it<< std::endl;
+        std::cout << endl << "Average Cost Increase = " << averageCostIncrease / it << std::endl;
         bc = bestCost;
         return bestTour;
     }
 };
-
 
 
 #endif //DA_PROJETO2_TSPSOLVER_H

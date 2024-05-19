@@ -392,7 +392,7 @@ void MRealWorldGraphParser(const string& dir_name, MGraph &g){
 void Parser(const string& path, MGraph &g, bool haversine){
     if (path[0] == 's' || path[0]=='t'){
         MToyGraphParser(path, g);}
-    if (path[0] == 'e')
+    else if (path[0] == 'e')
         MExtraMSGraphParser(path, g);
     else{
          if(haversine) {

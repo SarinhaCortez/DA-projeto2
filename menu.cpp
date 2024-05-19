@@ -112,13 +112,16 @@ void Menu::initialOptions(string graph) {
     if (option == "4") {
         if(g2.getNumVertex()==0){
             Parser(graph, g2, false);}
+        int startVertex;
+        cout << "Choose the vertex where you want the travelling to start (0-" << g2.getNumVertex()-1 << "): ";
+        cin >> startVertex;
         cout << "Loading your answer as fast as a blast..." <<endl;
-        TSPSolver T(g2, 10000, 0.99, 10000);
+        TSPSolver T(g2, 1000, 0.5, 10000);
         cout << "Here's the Traveling Sales-Woman Journey!";
         double bestCost;
-        std::vector<int> res = T.solve(bestCost);
+        std::vector<int> res = T.solve(bestCost, startVertex);
         for(auto el:res){
-            cout  << el<<", ";
+            cout<< el<<", ";
         }
         cout << endl;
         cout << "And here's how long she traveled: " << bestCost;
@@ -130,12 +133,12 @@ void Menu::initialOptions(string graph) {
 
 void Menu::continueM(string graph){
     cout << "Choose one option" << endl;
-    cout << "1. Go back to Menu\n" << "2.Quit\n" << endl;
+    cout << "1. Go back to Menu\n"  << "2.Quit\n" << endl;
     cout << "Option: ";
     string option;
     cin >> option;
 
-    while (!(option == "1" || option == "2") ){
+    while (!(option == "1" || option == "2" ) ){
         cout << "Invalid input. Option: ";
         cin >> option;
     }

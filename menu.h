@@ -10,8 +10,8 @@
 
 class Menu{
 public:
-    MGraph g1; //com haversine distance
-    MGraph g2; //sem haversine distance
+    MGraph g1; //com haversine distance automática
+    MGraph g2; //sem haversine distance automática
     Graph<int> g3; //aulas
      Menu();
     void buildGraph(string graph);
