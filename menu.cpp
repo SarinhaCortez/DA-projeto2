@@ -115,7 +115,7 @@ void Menu::initialOptions(string graph) {
     }
     if (option == "3") {
         if(g1.getNumVertex()==0){
-            Parser(graph, g1, false);}
+            Parser(graph, g1, true);}
         std::vector<std::vector<double>>* matrix = g1.getDistMatrix();
         std::vector<int> tsp;
         tsp.push_back(0);
