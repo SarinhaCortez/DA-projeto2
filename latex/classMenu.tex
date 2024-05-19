@@ -1,0 +1,108 @@
+\hypertarget{classMenu}{}\doxysection{Menu Class Reference}
+\label{classMenu}\index{Menu@{Menu}}
+
+
+Class of the menu system for analyzing graphs.  
+
+
+
+
+{\ttfamily \#include $<$menu.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_ad466dd83355124a6ed958430450bfe94}\label{classMenu_ad466dd83355124a6ed958430450bfe94}} 
+{\bfseries Menu} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classMenu}{Menu}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMenu_a8964e02467730c1afc769c473aa9c3f2}\label{classMenu_a8964e02467730c1afc769c473aa9c3f2}} 
+void {\bfseries open\+Menu} ()
+\item 
+void \mbox{\hyperlink{classMenu_a141d785c0518107956e44819b3c263fe}{wait}} (string graph)
+\begin{DoxyCompactList}\small\item\em Waits for user input to continue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_a7a87dd817a2d2880010215d123887545}{initial\+Options}} (string graph)
+\begin{DoxyCompactList}\small\item\em Displays the initial options menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMenu_ae864cbcdfd4916c1179f1e6d4fc5dff2}\label{classMenu_ae864cbcdfd4916c1179f1e6d4fc5dff2}} 
+int {\bfseries close\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Closes the menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMenu_a3d30b27b26b77263920d76d07862d036}\label{classMenu_a3d30b27b26b77263920d76d07862d036}} 
+void {\bfseries choose\+Graph} ()
+\begin{DoxyCompactList}\small\item\em Prompts the user to choose a graph to analyze. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_a9fe2378593de99081f3c2dc5d5c91c57}{continueM}} (string graph)
+\begin{DoxyCompactList}\small\item\em Continues menu interaction after a wait period. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_ad01ea6459879afd58189ed2b6380d417}\label{classMenu_ad01ea6459879afd58189ed2b6380d417}} 
+MGraph {\bfseries g1}
+\item 
+\mbox{\Hypertarget{classMenu_a70c675724bdf4973de5674b8e31a8366}\label{classMenu_a70c675724bdf4973de5674b8e31a8366}} 
+MGraph {\bfseries g2}
+\item 
+\mbox{\Hypertarget{classMenu_a920a2fb2b0f8e75583511536a5be49d5}\label{classMenu_a920a2fb2b0f8e75583511536a5be49d5}} 
+Graph {\bfseries g3}
+\item 
+\mbox{\Hypertarget{classMenu_a75cf00c47d7a3d292919185b80885df4}\label{classMenu_a75cf00c47d7a3d292919185b80885df4}} 
+bool {\bfseries parsed3}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class of the menu system for analyzing graphs. 
+
+The \mbox{\hyperlink{classMenu}{Menu}} class provides functionality to build and interact with various types of graphs. It supports operations such as selecting graphs, displaying menu options, and performing specific algorithms on the graphs. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMenu_a9fe2378593de99081f3c2dc5d5c91c57}\label{classMenu_a9fe2378593de99081f3c2dc5d5c91c57}} 
+\index{Menu@{Menu}!continueM@{continueM}}
+\index{continueM@{continueM}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{continueM()}{continueM()}}
+{\footnotesize\ttfamily void Menu\+::continueM (\begin{DoxyParamCaption}\item[{string}]{graph }\end{DoxyParamCaption})}
+
+
+
+Continues menu interaction after a wait period. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The name of the graph being analyzed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMenu_a7a87dd817a2d2880010215d123887545}\label{classMenu_a7a87dd817a2d2880010215d123887545}} 
+\index{Menu@{Menu}!initialOptions@{initialOptions}}
+\index{initialOptions@{initialOptions}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{initialOptions()}{initialOptions()}}
+{\footnotesize\ttfamily void Menu\+::initial\+Options (\begin{DoxyParamCaption}\item[{string}]{graph }\end{DoxyParamCaption})}
+
+
+
+Displays the initial options menu. 
+
+\mbox{\hyperlink{classMenu}{Menu}} where the user can select the algorithm to perform.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The name of the graph being analyzed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMenu_a141d785c0518107956e44819b3c263fe}\label{classMenu_a141d785c0518107956e44819b3c263fe}} 
+\index{Menu@{Menu}!wait@{wait}}
+\index{wait@{wait}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily void Menu\+::wait (\begin{DoxyParamCaption}\item[{string}]{graph }\end{DoxyParamCaption})}
+
+
+
+Waits for user input to continue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The name of the graph being analyzed. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+menu.\+h\item 
+menu.\+cpp\end{DoxyCompactItemize}

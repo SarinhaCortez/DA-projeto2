@@ -1,0 +1,39 @@
+\hypertarget{Utils_8h_source}{}\doxysection{Utils.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DA\_PROJETO2\_UTILS\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DA\_PROJETO2\_UTILS\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}data\_structures/MatrixGraph.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}data\_structures/WGraph.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{9 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{31 \textcolor{keywordtype}{bool} BacktrakingTSP(MGraph \&g, \textcolor{keywordtype}{int} \&dist, \textcolor{keywordtype}{int} \&minDist, std::vector<int> \&tsp, std::vector<int> \&\textcolor{keyword}{final}, \textcolor{keywordtype}{int} \&numVertex, \textcolor{keywordtype}{int} vertex, \textcolor{keywordtype}{bool}\&found, std::set<int> \&visited);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{44 \textcolor{keywordtype}{bool} notPresent(\textcolor{keywordtype}{int} i, std::vector<int> \&tsp);}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{57 pair<int, int> minDist(std::vector<double> currentRow, std::vector<int> \&tsp);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{72 \textcolor{keywordtype}{bool} nearestNeighbour(MGraph \&g,  std::vector<int> \&tsp, std::vector<std::vector<double>>* matrix);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{85 vector<Vertex *> prim(Graph\& g);}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{100 \textcolor{keywordtype}{void} preOrder(vector<Vertex *> vertexSet, Vertex* v0, vector<Vertex*>\& tour);}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{113 \textcolor{keywordtype}{double} calculateTourDistance(\textcolor{keyword}{const} vector<Vertex *>\& tour);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{126 \textcolor{keywordtype}{void} triangularApproximation(Graph \&g);}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{141 vector<Vertex *> removeDup(vector<Vertex*> tour);}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{153 \textcolor{keywordtype}{double} harversineDistance(Vertex * v1, Vertex * v2);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{164 \textcolor{keywordtype}{void} RealWorldFullyConnected(Graph \& g);}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//DA\_PROJETO2\_UTILS\_H}}
+
+\end{DoxyCode}

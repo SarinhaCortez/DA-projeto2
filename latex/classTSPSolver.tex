@@ -1,0 +1,73 @@
+\hypertarget{classTSPSolver}{}\doxysection{TSPSolver Class Reference}
+\label{classTSPSolver}\index{TSPSolver@{TSPSolver}}
+
+
+A class that solves the Traveling Salesperson Problem (TSP) using Simulated Annealing.  
+
+
+
+
+{\ttfamily \#include $<$TSPSolver.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTSPSolver_a81c8f5d44d9908d387d255acaccbc7ff}{TSPSolver}} (MGraph \&graph, double initial\+Temperature, double cooling\+Rate, int max\+Iterations)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classTSPSolver}{TSPSolver}} object. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{classTSPSolver_a25610616f277f35e0b491aefd1e27d83}{solve}} (double \&bc, int sV)
+\begin{DoxyCompactList}\small\item\em Solves the TSP problem using simulated annealing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that solves the Traveling Salesperson Problem (TSP) using Simulated Annealing. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTSPSolver_a81c8f5d44d9908d387d255acaccbc7ff}\label{classTSPSolver_a81c8f5d44d9908d387d255acaccbc7ff}} 
+\index{TSPSolver@{TSPSolver}!TSPSolver@{TSPSolver}}
+\index{TSPSolver@{TSPSolver}!TSPSolver@{TSPSolver}}
+\doxysubsubsection{\texorpdfstring{TSPSolver()}{TSPSolver()}}
+{\footnotesize\ttfamily TSPSolver\+::\+TSPSolver (\begin{DoxyParamCaption}\item[{MGraph \&}]{graph,  }\item[{double}]{initial\+Temperature,  }\item[{double}]{cooling\+Rate,  }\item[{int}]{max\+Iterations }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \mbox{\hyperlink{classTSPSolver}{TSPSolver}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph representing the TSP problem. \\
+\hline
+{\em initial\+Temperature} & The initial temperature for the simulated annealing algorithm. \\
+\hline
+{\em cooling\+Rate} & The rate at which the temperature decreases. \\
+\hline
+{\em max\+Iterations} & The maximum number of iterations for the algorithm. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTSPSolver_a25610616f277f35e0b491aefd1e27d83}\label{classTSPSolver_a25610616f277f35e0b491aefd1e27d83}} 
+\index{TSPSolver@{TSPSolver}!solve@{solve}}
+\index{solve@{solve}!TSPSolver@{TSPSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ TSPSolver\+::solve (\begin{DoxyParamCaption}\item[{double \&}]{bc,  }\item[{int}]{sV }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Solves the TSP problem using simulated annealing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bc} & The best cost found during the search. \\
+\hline
+{\em sV} & The starting vertex for the TSP tour. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector representing the best tour found.
+\end{DoxyReturn}
+@complexity The time complexity of this function depends on the implementation of find\+Initial\+Hamiltonian\+Path, generate\+Neighbor, and the number of iterations. Complexity\+: O(\+N(\+V)) where N are the neighbors and V the vertex 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+TSPSolver.\+h\end{DoxyCompactItemize}
