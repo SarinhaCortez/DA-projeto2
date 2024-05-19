@@ -81,6 +81,7 @@ bool notPresent(int i, std::vector<int> &tsp){
     return true;
 }
 
+
 pair<int, int> minDist(std::vector<double> currentRow, std::vector<int> &tsp){
     int min=INT_MAX;
     int minVertex;
@@ -153,8 +154,6 @@ void preOrder(unordered_map<int, Vertex *> vertexSet, Vertex* v0, vector<Vertex 
     }
     return;
 }
-
-
 
 
 unordered_map<int, Vertex *> prim(Graph * g) {

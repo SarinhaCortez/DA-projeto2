@@ -4,6 +4,7 @@
 
 #ifndef DA_PROJETO2_HAVERSINE_H
 #define DA_PROJETO2_HAVERSINE_H
+#include <math.h>
 
 constexpr double PI = 3.14159265358979323846;
 using angle_t      = double;

@@ -54,15 +54,15 @@ const double earthRadius = 6371000;
 double convert_radians(double coord){
 return coord*pi/180.;}
 
-int harversineDistance(int node1, int node2, MGraph &g){
+int harversineDistance(int vertex1, int vertex2, MGraph &g){
     double lon1, lat1, lon2, lat2;
-    auto it1 = g.getVertexSet().find(node1);
+    auto it1 = g.getVertexSet().find(vertex1);
     if (it1 != g.getVertexSet().end()) {
         std::pair<double, double> node1 = it1->second;
         lon1 = node1.first;
         lat1 = node1.second;
     }
-    auto it2 = g.getVertexSet().find(node2);
+    auto it2 = g.getVertexSet().find(vertex2);
     if (it2 != g.getVertexSet().end()) {
         std::pair<double, double> node2 = it2->second;
         lon2 = node2.first;
@@ -88,12 +88,13 @@ int harversineDistance(int node1, int node2, MGraph &g){
     return distance;
 }
 
-void MExtraMSGraphParserHaversine(const string& edge_filename, MGraph &g){
+/* Calcular a haversine distance nestes grafos não é necessário, uma vez que estes já são fully connected.
+ * void MExtraMSGraphParserHaversine(const string& edge_filename, MGraph &g){
 
     string line; int maximum = 0;
 
-    /* o primeiro while loop serve apenas para limitar os nós a usar, caso contrário
-     * a matriz fica com muito espaço inutilizado*/
+    o primeiro while loop serve apenas para limitar os nós a usar, caso contrário
+     * a matriz fica com muito espaço inutilizado
     ifstream edgescut("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename+".csv");
 
     if (!edgescut.is_open()) {
@@ -118,7 +119,7 @@ void MExtraMSGraphParserHaversine(const string& edge_filename, MGraph &g){
     g.updateMatrixDim(maximum);
     edgescut.close();
 
-    /*o segundo atualiza a latitude e a longitude dos nós usados*/
+    o segundo atualiza a latitude e a longitude dos nós usados
     ifstream nodes("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/nodes.csv");
 
     if (!nodes.is_open()) {
@@ -145,7 +146,7 @@ void MExtraMSGraphParserHaversine(const string& edge_filename, MGraph &g){
     }
     nodes.close();
 
-    /*o terceiro preenche a matriz*/
+    o terceiro preenche a matriz
     ifstream edges("../dataset/Extra_Medium_Sized_Graphs/Extra_Medium_Sized_Graphs/"+ edge_filename+".csv");
 
     if (!edges.is_open()) {
@@ -180,7 +181,7 @@ void MExtraMSGraphParserHaversine(const string& edge_filename, MGraph &g){
         }
     }
 
-}
+}*/
 
 void MExtraMSGraphParser(const string& edge_filename, MGraph &g){
 
