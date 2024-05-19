@@ -1,11 +1,10 @@
-//
-// Created by saracortez on 25/04/24.
-//
+#include "WParser.h"
 
-#include "DataParser.h"
 
-void ToyGraphParser(const string& filename, Graph<int> &g) {
-    ifstream csv("../dataset/Toy-Graphs/Toy-Graphs/" + filename + ".csv");
+vector<int> ToyGraphParser(const string& filename, Graph &g) {
+    int nEdges = 0, nVertx = 0;
+    vector<int> nms;
+    ifstream csv("../dataset/Toy-Graphs/Toy-Graphs/" + filename +".csv");
 
     if (!csv.is_open()) {
         cerr << "Error opening csv file!" << endl;
@@ -28,19 +27,25 @@ void ToyGraphParser(const string& filename, Graph<int> &g) {
 
         if (seenVertices.insert(origin).second) {
             g.addVertex(origin);
+            nVertx++;
         }
         if (seenVertices.insert(destination).second) {
             g.addVertex(destination);
+            nVertx++;
         }
 
         g.addEdge(origin, destination, distance);
         g.addEdge(destination, origin, distance);
+        nEdges += 2;
     }
 
     csv.close();
+    nms.push_back(nEdges);
+    nms.push_back(nVertx);
+    return nms;
 }
 
-void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
+void ExtraMSGraphParser(const string& edge_filename, Graph &g){
 
     string line;
 
@@ -65,8 +70,12 @@ void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
         double lat = stod(lat_str);
 
         g.addVertex(id);
-        (*(g.getVertexSet().end()-1))->setLong(lon);
-        (*(g.getVertexSet().end()-1))->setLat(lat);
+        auto it = g.getVertexSet().find(id);
+        auto v = it->second;
+        v->setLong(lon);
+        v->setLat(lat);
+        //(*(g.getVertexSet().end()-1))->setLong(lon);
+        //(*(g.getVertexSet().end()-1))->setLat(lat);
     }
     nodes.close();
 
@@ -98,7 +107,8 @@ void ExtraMSGraphParser(const string& edge_filename, Graph<int> &g){
 
 }
 
-void RealWorldGraphParser(const string& dir_name, Graph<int> &g){
+
+void RealWorldGraphParser(const string& dir_name, Graph &g){
 
     string line;
     ifstream nodes("../dataset/Real-World-Graphs/Real-World-Graphs/"+ dir_name + "/nodes.csv");
@@ -122,8 +132,12 @@ void RealWorldGraphParser(const string& dir_name, Graph<int> &g){
         double lat = stod(lat_str);
 
         g.addVertex(id);
-        (*(g.getVertexSet().end()-1))->setLong(lon);
-        (*(g.getVertexSet().end()-1))->setLat(lat);
+        auto it = g.getVertexSet().find(id);
+        auto v = it->second;
+        v->setLong(lon);
+        v->setLat(lat);
+        //(*(g.getVertexSet().end()-1))->setLong(lon);
+        //(*(g.getVertexSet().end()-1))->setLat(lat);
     }
 
     nodes.close();
@@ -157,19 +171,13 @@ void RealWorldGraphParser(const string& dir_name, Graph<int> &g){
     edges.close();
 }
 
-void Parser(const string& path, Graph<int> &g, bool haversine){
+
+void WParser(const string& path, Graph &g){
     if (path[0] == 's' || path[0]=='t'){
         ToyGraphParser(path, g);}
-
+    if (path[0] == 'e')
+        ExtraMSGraphParser(path, g);
     else{
-
-            if (path[0] == 'e')
-                ExtraMSGraphParser(path, g);
-
-            else
-                RealWorldGraphParser(path, g);
-        }
-
+        RealWorldGraphParser(path, g);
     }
-
-
+}
