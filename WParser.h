@@ -18,6 +18,7 @@ using namespace std;
 *
 * @param filename The name of the CSV file (without the .csv extension) to be parsed.
 * @param g A reference to the MGraph object to be populated.
+ *@complexity: O(E+V), where EE is the number of edges and VV is the number of vertices in the graph.
 */
 vector<int> ToyGraphParser(const string& filename, Graph &g);
 
@@ -29,6 +30,7 @@ vector<int> ToyGraphParser(const string& filename, Graph &g);
 *
 * @param filename The name of the CSV file (without the .csv extension) to be parsed.
 * @param g A reference to the MGraph object to be populated.
+ * @complexity O(N+E), where NN is the number of nodes (vertices) and EE is the number of edges in the graph
 */
 void ExtraMSGraphParser(const string& edge_filename, Graph &g);
 
@@ -40,6 +42,7 @@ void ExtraMSGraphParser(const string& edge_filename, Graph &g);
 *
 * @param filename The name of the CSV folder where exist the files to be parsed.
 * @param g A reference to the MGraph object to be populated.
+ * @complexity:O(N+E), where NN is the number of nodes (vertices) and EE is the number of edges in the graph.
 */
 void RealWorldGraphParser(const string& dir_name, Graph &g);
 
@@ -50,6 +53,7 @@ void RealWorldGraphParser(const string& dir_name, Graph &g);
  *
  * @param path The path or filename indicating the dataset to be parsed.
  * @param g A reference to the MGraph object to be populated.
+ * @complexity: the complexity of one of the functions it calls (O(N+E)).
  */
 void WParser(const string& path, Graph &g);
 

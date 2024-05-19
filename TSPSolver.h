@@ -179,6 +179,10 @@ public:
      * @param bc The best cost found during the search.
      * @param sV The starting vertex for the TSP tour.
      * @return A vector representing the best tour found.
+
+     *  @complexity The time complexity of this function depends on the implementation of
+     * findInitialHamiltonianPath, generateNeighbor, and the number of iterations.
+     * Complexity: O(N(V)) where N are the neighbors and V the vertex
      */
     std::vector<int> solve(double &bc, int sV) {
         double averageCostIncrease = 0.0;

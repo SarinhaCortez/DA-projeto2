@@ -25,6 +25,7 @@ using namespace std;
 *
 * @param filename The name of the CSV file (without the .csv extension) to be parsed.
 * @param g A reference to the MGraph object to be populated.
+ * @complexity O(max(V,E)), where V are the Vertices and E the edges.
 */
 void MToyGraphParser(const string& filename, MGraph &g);
 
@@ -35,6 +36,7 @@ void MToyGraphParser(const string& filename, MGraph &g);
  *
  * @param coord The coordinate in degrees.
  * @return The coordinate converted to radians.
+ * complexity O(1)
  */
 double convert_radians(double coord);
 
@@ -51,6 +53,7 @@ double convert_radians(double coord);
  * @param g A reference to the graph containing the vertexs. Each
  *          vertex is a pair of doubles representing longitude and latitude.
  * @return The Haversine distance between the two nodes.
+ * @complexity O(1)
  */
 int harversineDistance(int node1, int node2, MGraph &g);
 
@@ -64,6 +67,7 @@ int harversineDistance(int node1, int node2, MGraph &g);
  *
  * @param edge_filename The name of the CSV file containing edge data (without the .csv extension).
  * @param g A reference to the MGraph object to be populated.
+ *@complexity O(max(E,V)) where V are the vertices and E the edges
  */
 void MExtraMSGraphParser(const string& edge_filename, MGraph &g);
 
@@ -77,6 +81,7 @@ void MExtraMSGraphParser(const string& edge_filename, MGraph &g);
  *
  * @param dir_name The name of the directory containing the node and edge CSV files.
  * @param g A reference to the MGraph object to be populated.
+ * @complexity O(V**2) where V are the vertexs
  */
 void MRealWorldGraphParserHaversine(const string& dir_name, MGraph &g);
 
@@ -89,6 +94,7 @@ void MRealWorldGraphParserHaversine(const string& dir_name, MGraph &g);
  *
  * @param dir_name The name of the directory containing the node and edge CSV files.
  * @param g A reference to the MGraph object to be populated.
+ * @complexity O(max(V,E)) where E are the edges and V are the Vertices
  */
 void MRealWorldGraphParser(const string& dir_name, MGraph &g);
 
@@ -100,6 +106,7 @@ void MRealWorldGraphParser(const string& dir_name, MGraph &g);
  * @param path The path or filename indicating the dataset to be parsed.
  * @param g A reference to the MGraph object to be populated.
  * @param haversine A boolean flag indicating whether to use Haversine distance for real-world graphs.
+ * @complexity in the worst case the maximum complexity between all the parsers called
  */
 void Parser(const string& path, MGraph &g, bool haversine);
 
