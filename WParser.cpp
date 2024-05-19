@@ -1,7 +1,7 @@
 #include "WParser.h"
 
 
-vector<int> ToyGraphParser(const string& filename, Graph &g) {
+void ToyGraphParser(const string& filename, Graph &g) {
     int nEdges = 0, nVertx = 0;
     vector<int> nms;
     ifstream csv("../dataset/Toy-Graphs/Toy-Graphs/" + filename +".csv");
@@ -42,7 +42,7 @@ vector<int> ToyGraphParser(const string& filename, Graph &g) {
     csv.close();
     nms.push_back(nEdges);
     nms.push_back(nVertx);
-    return nms;
+
 }
 
 void ExtraMSGraphParser(const string& edge_filename, Graph &g){
@@ -114,6 +114,7 @@ void RealWorldGraphParser(const string& dir_name, Graph &g){
     ifstream nodes("../dataset/Real-World-Graphs/Real-World-Graphs/"+ dir_name + "/nodes.csv");
 
     if (!nodes.is_open()) {
+
         cerr << "Error opening nodes file!" << endl;
     }
 
@@ -175,7 +176,7 @@ void RealWorldGraphParser(const string& dir_name, Graph &g){
 void WParser(const string& path, Graph &g){
     if (path[0] == 's' || path[0]=='t'){
         ToyGraphParser(path, g);}
-    if (path[0] == 'e')
+    else if (path[0] == 'e')
         ExtraMSGraphParser(path, g);
     else{
         RealWorldGraphParser(path, g);

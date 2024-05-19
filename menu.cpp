@@ -98,10 +98,12 @@ void Menu::initialOptions(string graph) {
             cout << "This Graph is not fully connected. We can´t perform this algorithm." << endl;
         }
         else{
+
             WParser(graph, g3);
             if(graph[0] == 'g'){
                 RealWorldFullyConnected(g3);
             }
+
             triangularApproximation(g3);
             cout<<endl;
             wait(graph);
