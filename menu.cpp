@@ -80,15 +80,16 @@ void Menu::initialOptions(string graph) {
         if(BacktrakingTSP(g1, dist, minDist, tsp, final, numVertex, initial, found, visited)){
             double totalMinDist=0;
             std::vector<std::vector<double>>* matrix = g1.getDistMatrix();
+            cout<<"Path: ";
             for(int i=0; i<final.size()-1; i++){
                 totalMinDist+=(*matrix)[final[i]][final[i+1]];
-                cout<<final[i]<<endl;
+                cout<<final[i]<<" ";
             }
             cout<<"0"<<endl;
-            cout<<"Total MIn Dist: "<<totalMinDist<<endl;
+            cout<<"Total Min Dist: "<<totalMinDist<<endl;
         }
         else{
-            cout<<"nao existe lol"<<endl;
+            cout<<"Path not found"<<endl;
         }
 
         cout<<endl;
@@ -102,7 +103,6 @@ void Menu::initialOptions(string graph) {
         else{
             if(!parsed3){
                 WParser(graph, g3);
-                cout << "parsed";
                 parsed3 = true;
             }
             if(graph[0] == 'g'){

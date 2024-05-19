@@ -119,7 +119,7 @@ bool nearestNeighbour(MGraph &g,  std::vector<int> &tsp, std::vector<std::vector
         totalDist+=minDistance.first;
 
         if(minDistance.first == INT_MAX){
-            cout <<"nao existe lol"<<endl;
+            cout <<"Path not found"<<endl;
             return false;
         }
 
@@ -131,9 +131,11 @@ bool nearestNeighbour(MGraph &g,  std::vector<int> &tsp, std::vector<std::vector
 
     tsp.push_back(0);
     totalDist+=(*matrix)[0][initialVertex];
+    cout<<"Path: ";
     for(auto v: tsp){
-        cout<<v<<endl;
+        cout<<v<<" ";
     }
+    cout<<endl;
     cout<<"Total min Dist: "<<totalDist<<endl;
     return true;
 
